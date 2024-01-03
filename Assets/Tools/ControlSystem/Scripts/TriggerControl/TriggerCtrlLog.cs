@@ -18,7 +18,7 @@ namespace Control {
 		LOG,
 	}
 	
-	public class TriggerCtrlLog : TriggerCtrlTrigger {
+	public class TriggerCtrlLog : BaseTriggerCtrl {
 		public TriggerCtrlLogLevel level = TriggerCtrlLogLevel.LOG;
 		public string message;
 		public Object context;

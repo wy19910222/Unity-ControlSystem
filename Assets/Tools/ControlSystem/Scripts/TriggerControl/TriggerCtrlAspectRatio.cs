@@ -11,7 +11,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerCtrlAspectRatio : TriggerCtrlTrigger {
+	public class TriggerCtrlAspectRatio : BaseTriggerCtrl {
 		public AspectRatioFitter fitter;
 		public bool targetAsValue;
 		[HideIf("@this.targetAsValue")]

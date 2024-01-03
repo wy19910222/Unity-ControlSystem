@@ -44,9 +44,7 @@ namespace Control {
 #endif
 					StartCoroutine(IETrigger());
 				} else {
-					BeforeTrigger();
 					DoTrigger();
-					AfterTrigger();
 					m_OnTrigger?.Invoke();
 				}
 			}
@@ -54,17 +52,11 @@ namespace Control {
 
 		private IEnumerator IETrigger() {
 			yield return new WaitForSeconds(triggerDelay);
-			BeforeTrigger();
 			DoTrigger();
-			AfterTrigger();
 			m_OnTrigger?.Invoke();
 		}
 		
-		protected abstract void BeforeTrigger();
-		
 		protected abstract void DoTrigger();
-		
-		protected abstract void AfterTrigger();
 		
 		public void OnTrigger(Action action) {
 			m_OnTrigger += action;

@@ -17,18 +17,12 @@ namespace Control {
 		public List<T> steps = new List<T>();
 	
 		private Coroutine m_Co;
-
-		protected override void BeforeTrigger() {
-		}
 	
 		protected override void DoTrigger() {
 			if (singleProcess) {
 				StopProcess();
 			}
 			StartProcess();
-		}
-
-		protected override void AfterTrigger() {
 		}
 	
 		public void StartProcess() {
