@@ -56,11 +56,11 @@ namespace Control {
 						}
 					}
 					if (newRandom && (newPart & newPart - 1) != 0) {
-						bool uniform = Target.bArguments[2];
+						bool uniform = Target.bArguments[3];
 						if (!DrawToggle(true, uniform ? "一起随机" : "分开随机", BTN_WIDTH_OPTION)) {
 							Property.RecordForUndo("BArguments");
 							// ReSharper disable once RedundantAssignment
-							Target.bArguments[2] = uniform = !uniform;
+							Target.bArguments[3] = uniform = !uniform;
 						}
 					}
 					EditorGUILayout.EndHorizontal();

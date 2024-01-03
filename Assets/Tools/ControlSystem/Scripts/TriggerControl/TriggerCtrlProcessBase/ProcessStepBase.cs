@@ -52,9 +52,9 @@ namespace Control {
 		
 		// transformType说明：0-localPosition, 1-localEulerAngles, 2-localScale, 3-position, 4-eulerAngles
 		// Transform trans, int[0] transformType, int[1] part, bool[0] targetAsValue, bool[1] random, bool[2] relative, Vector3[012] value
-		// Transform trans, int[0] transformType, int[1] part, bool[0] targetAsValue, bool[1] random, bool[2] relative, bool[2] uniform, Vector3[012] min, Vector3[345] max
+		// Transform trans, int[0] transformType, int[1] part, bool[0] targetAsValue, bool[1] random, bool[2] relative, bool[3] uniform, Vector3[012] min, Vector3[345] max
 		// Transform trans, int[0] transformType, int[1] part, bool[0] targetAsValue, bool[1] random, bool[2] relative, Transform[0] target
-		// Transform trans, int[0] transformType, int[1] part, bool[0] targetAsValue, bool[1] random, bool[2] relative, bool[2] uniform, Transform[0] min, Transform[1] max
+		// Transform trans, int[0] transformType, int[1] part, bool[0] targetAsValue, bool[1] random, bool[2] relative, bool[3] uniform, Transform[0] min, Transform[1] max
 		TRANSFORM = 31,	// tween
 		// lookPart/upPart说明：0-x, 1-y, 2-z, 3--x, 4--y, 5--z
 		// Transform trans, int[0] lookPart, int[1] upPart, Transform[0] target
@@ -365,6 +365,7 @@ namespace Control {
 					iArguments.Add(7);	// part
 					bArguments.Add(false);	// targetAsValue
 					bArguments.Add(false);	// random
+					bArguments.Add(false);	// relative
 					bArguments.Add(false);	// uniform
 					fArguments.Add(0);	// minX
 					fArguments.Add(0);	// minY

@@ -24,7 +24,7 @@ namespace Control {
 				if (targetAsValue) {
 					if (random) {
 						float randomX, randomY, randomZ;
-						bool uniform = GetBArgument(2);
+						bool uniform = GetBArgument(3);
 						if (uniform) {
 							randomX = randomY = randomZ = Random.value;
 						} else {
@@ -84,7 +84,7 @@ namespace Control {
 				} else {
 					if (random) {
 						float randomX, randomY, randomZ;
-						bool uniform = GetBArgument(2);
+						bool uniform = GetBArgument(3);
 						if (uniform) {
 							randomX = randomY = randomZ = Random.value;
 						} else {
