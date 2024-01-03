@@ -31,7 +31,7 @@ namespace Control {
 			}
 		}
 		private void DrawAudioSourceCtrl() {
-			AudioSource newObj = DrawCompField<AudioSource>("音源", Target.obj);
+			AudioSource newObj = DrawCompFieldWithThisBtn<AudioSource>("音源", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -61,7 +61,7 @@ namespace Control {
 		private ReorderableList m_AudioList;
 		private void DrawAudiosPlay() {
 			if (m_AudioList == null) {
-				m_AudioList = new ReorderableList(Target.objArguments, typeof(Object), true, false, false, false) {
+				m_AudioList = new ReorderableList(Target.objArguments, typeof(Object), true, true, false, false) {
 					drawHeaderCallback = rect => {
 						Rect leftRect = new Rect(rect.x, rect.y, rect.width, rect.height);
 						EditorGUI.LabelField(leftRect, $"音频列表({Target.objArguments.Count})");

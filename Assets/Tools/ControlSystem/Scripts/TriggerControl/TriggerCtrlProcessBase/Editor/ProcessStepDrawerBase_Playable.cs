@@ -12,7 +12,7 @@ using UnityEditor;
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
 		private void DrawPlayableCtrl() {
-			PlayableDirector newObj = DrawCompField<PlayableDirector>("导演", Target.obj);
+			PlayableDirector newObj = DrawCompFieldWithThisBtn<PlayableDirector>("导演", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -32,7 +32,7 @@ namespace Control {
 		}
 		
 		private void DrawPlayableGoto() {
-			PlayableDirector newObj = DrawCompField<PlayableDirector>("导演", Target.obj);
+			PlayableDirector newObj = DrawCompFieldWithThisBtn<PlayableDirector>("导演", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;

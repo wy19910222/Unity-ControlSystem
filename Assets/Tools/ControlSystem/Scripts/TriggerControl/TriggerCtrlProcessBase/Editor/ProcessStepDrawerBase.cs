@@ -319,6 +319,67 @@ namespace Control {
 				}
 			}
 		}
+
+		protected T DrawObjectFieldWithThisBtn<T>(string text, UObject obj) where T : UObject {
+			EditorGUILayout.BeginHorizontal();
+			T newObj = DrawObjectField<T>(text, obj);
+			GameObject go = GetTargetTrigger()?.gameObject;
+			if (go) {
+				if (typeof(T) == typeof(GameObject)) {
+					CustomEditorGUI.BeginDisabled(newObj == go);
+					if (GUILayout.Button("ThisGo", GUILayout.Width(s_ContextWidth * 0.12F - 3F))) {
+						newObj = go as T;
+					}
+					CustomEditorGUI.EndDisabled();
+				} else if (typeof(Component).IsAssignableFrom(typeof(T))) {
+					T comp = go.GetComponent<T>();
+					CustomEditorGUI.BeginDisabled(!comp || comp == newObj);
+					if (GUILayout.Button("ThisGo", GUILayout.Width(s_ContextWidth * 0.12F - 3F))) {
+						newObj = comp;
+					}
+					CustomEditorGUI.EndDisabled();
+				}
+			}
+			EditorGUILayout.EndHorizontal();
+			return newObj;
+		}
+
+		protected T DrawCompFieldWithThisBtn<T>(string text, UObject obj, params Type[] types) where T : Component {
+			EditorGUILayout.BeginHorizontal();
+			T newObj = DrawCompField<T>(text, obj, types);
+			if (!newObj) {
+				GameObject go = GetTargetTrigger()?.gameObject;
+				if (go) {
+					T comp = go.GetComponent<T>();
+					CustomEditorGUI.BeginDisabled(!comp);
+					if (GUILayout.Button("ThisGo", GUILayout.Width(s_ContextWidth * 0.12F - 3F))) {
+						newObj = comp;
+					}
+					CustomEditorGUI.EndDisabled();
+				}
+			}
+			EditorGUILayout.EndHorizontal();
+			return newObj;
+		}
+
+		protected void SetDirty() {
+			BaseTriggerCtrl trigger = GetTargetTrigger();
+			if (trigger != null) {
+				EditorUtility.SetDirty(trigger);
+			}
+		}
+
+		protected BaseTriggerCtrl GetTargetTrigger() {
+			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
+			BaseTriggerCtrl trigger = null;
+			for (int i = 0; i < valueCount; i++) {
+				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
+				if (trigger != null) {
+					break;
+				}
+			}
+			return trigger;
+		}
 		
 		protected static int DrawEnumButtons(string text, int value, string[] displayedOptions, int[] optionValues, bool isMask = false, params GUILayoutOption[] options) {
 			EditorGUILayout.BeginHorizontal();
@@ -349,7 +410,7 @@ namespace Control {
 		protected static bool DrawToggle(bool value, string text, params GUILayoutOption[] options) {
 			return CustomEditorGUI.Toggle(value, text, CustomEditorGUI.COLOR_TOGGLE_CHECKED, options);
 		}
-		
+
 		protected static T DrawObjectField<T>(string text, UObject obj) where T : UObject {
 			T newObj = string.IsNullOrEmpty(text) ?
 					EditorGUILayout.ObjectField(obj, typeof(T), true) as T :
@@ -437,20 +498,6 @@ namespace Control {
 						EditorGUI.ObjectField(rect, obj, _returnType, true) as T :
 						EditorGUI.ObjectField(rect, text, obj, _returnType, true) as T;
 				return newObj;
-			}
-		}
-
-		protected void SetDirty() {
-			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			BaseTriggerCtrl trigger = null;
-			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
-				if (trigger != null) {
-					break;
-				}
-			}
-			if (trigger != null) {
-				EditorUtility.SetDirty(trigger);
 			}
 		}
 		

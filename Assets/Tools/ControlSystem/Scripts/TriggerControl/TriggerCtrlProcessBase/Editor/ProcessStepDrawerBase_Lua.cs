@@ -17,7 +17,7 @@ namespace Control {
 		private LuaInjectionDataDrawer InjectionDrawer => m_InjectionDrawer ?? (m_InjectionDrawer = new LuaInjectionDataDrawer());
 		
 		private void DrawLuaCodeExecute() {
-			LuaBehaviour newObj = DrawCompField<LuaBehaviour>("self", Target.obj);
+			LuaBehaviour newObj = DrawCompFieldWithThisBtn<LuaBehaviour>("self", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -47,7 +47,7 @@ namespace Control {
 		}
 
 		private void DrawLuaSetValue() {
-			LuaBehaviourWithPath newObj = DrawCompField<LuaBehaviourWithPath>("作用域", Target.obj);
+			LuaBehaviourWithPath newObj = DrawCompFieldWithThisBtn<LuaBehaviourWithPath>("作用域", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -103,7 +103,7 @@ namespace Control {
 		}
 
 		private void DrawLuaFunctionInvoke() {
-			LuaBehaviourWithPath newObj = DrawCompField<LuaBehaviourWithPath>("作用域", Target.obj);
+			LuaBehaviourWithPath newObj = DrawCompFieldWithThisBtn<LuaBehaviourWithPath>("作用域", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;

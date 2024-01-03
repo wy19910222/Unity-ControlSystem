@@ -16,7 +16,7 @@ using AnimatorControllerParameterType = UnityEngine.AnimatorControllerParameterT
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
 		private void DrawAnimatorParameters() {
-			Animator newObj = DrawCompField<Animator>("动画器", Target.obj);
+			Animator newObj = DrawCompFieldWithThisBtn<Animator>("动画器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -143,7 +143,7 @@ namespace Control {
 			}
 		}
 		private void DrawAnimatorController() {
-			Animator newObj = DrawCompField<Animator>("动画器", Target.obj);
+			Animator newObj = DrawCompFieldWithThisBtn<Animator>("动画器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -151,7 +151,7 @@ namespace Control {
 		
 			if (newObj != null) {
 				EditorGUILayout.BeginHorizontal();
-				RuntimeAnimatorController newController = DrawObjectField<RuntimeAnimatorController>("状态机", Target.objArguments[0]);
+				RuntimeAnimatorController newController = DrawObjectFieldWithThisBtn<RuntimeAnimatorController>("状态机", Target.objArguments[0]);
 				if (newController != Target.objArguments[0]) {
 					Property.RecordForUndo("ObjArguments");
 					Target.objArguments[0] = newController;
@@ -163,7 +163,7 @@ namespace Control {
 			}
 		}
 		private void DrawAnimatorAvatar() {
-			Animator newObj = DrawCompField<Animator>("动画器", Target.obj);
+			Animator newObj = DrawCompFieldWithThisBtn<Animator>("动画器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -171,7 +171,7 @@ namespace Control {
 		
 			if (newObj != null) {
 				EditorGUILayout.BeginHorizontal();
-				Avatar newAvatar = DrawObjectField<Avatar>("形象", Target.objArguments[0]);
+				Avatar newAvatar = DrawObjectFieldWithThisBtn<Avatar>("形象", Target.objArguments[0]);
 				if (newAvatar != Target.objArguments[0]) {
 					Property.RecordForUndo("ObjArguments");
 					Target.objArguments[0] = newAvatar;
@@ -183,7 +183,7 @@ namespace Control {
 			}
 		}
 		private void DrawAnimatorApplyRootMotion() {
-			Animator newObj = DrawCompField<Animator>("动画器", Target.obj);
+			Animator newObj = DrawCompFieldWithThisBtn<Animator>("动画器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;

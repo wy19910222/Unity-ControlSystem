@@ -16,7 +16,7 @@ namespace Control {
 		private ReorderableList m_TriggerList;
 		private void DrawTrigger() {
 			if (m_TriggerList == null) {
-				m_TriggerList = new ReorderableList(Target.objArguments, typeof(UnityEngine.Object), true, false, false, false) {
+				m_TriggerList = new ReorderableList(Target.objArguments, typeof(UnityEngine.Object), true, true, false, false) {
 					drawHeaderCallback = rect => {
 						Rect leftRect = new Rect(rect.x, rect.y, rect.width, rect.height);
 						EditorGUI.LabelField(leftRect, $"触发器列表({Target.objArguments.Count})");
@@ -105,7 +105,7 @@ namespace Control {
 		}
 
 		private void DrawStateController() {
-			StateController newObj = DrawCompField<StateController>("控制器", Target.obj);
+			StateController newObj = DrawCompFieldWithThisBtn<StateController>("控制器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -259,7 +259,7 @@ namespace Control {
 		}
 		
 		private void DrawProgressController() {
-			ProgressController newObj = DrawCompField<ProgressController>("控制器", Target.obj);
+			ProgressController newObj = DrawCompFieldWithThisBtn<ProgressController>("控制器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -349,7 +349,7 @@ namespace Control {
 			EditorGUILayout.LabelField("", width);
 			EditorGUILayout.EndHorizontal();
 			if (!newBroadcast) {
-				GameObject newTarget = DrawObjectField<GameObject>("目标", Target.objArguments[0]);
+				GameObject newTarget = DrawObjectFieldWithThisBtn<GameObject>("目标", Target.objArguments[0]);
 				if (newTarget != Target.objArguments[0]) {
 					Property.RecordForUndo("ObjArguments");
 					Target.objArguments[0] = newTarget;

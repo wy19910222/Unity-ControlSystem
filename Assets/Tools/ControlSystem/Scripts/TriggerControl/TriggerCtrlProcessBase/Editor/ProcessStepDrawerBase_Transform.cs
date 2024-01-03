@@ -12,7 +12,7 @@ using UnityEditor;
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
 		private void DrawTransform() {
-			Transform newObj = DrawObjectField<Transform>("游戏对象", Target.obj);
+			Transform newObj = DrawObjectFieldWithThisBtn<Transform>("游戏对象", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -130,7 +130,7 @@ namespace Control {
 		}
 		
 		private void DrawLookAt() {
-			Transform newObj = DrawObjectField<Transform>("游戏对象", Target.obj);
+			Transform newObj = DrawObjectFieldWithThisBtn<Transform>("游戏对象", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -168,16 +168,16 @@ namespace Control {
 		}
 		
 		private void DrawCameraAnchor() {
-			Transform newObj = DrawObjectField<Transform>("游戏对象", Target.obj);
+			Transform newObj = DrawObjectFieldWithThisBtn<Transform>("游戏对象", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
 			}
 			if (newObj != null) {
 #if CINEMACHINE_EXIST
-				Behaviour newCamera = DrawCompField<Behaviour>("摄像机", Target.objArguments[0], typeof(Camera), typeof(Cinemachine.CinemachineVirtualCamera));
+				Behaviour newCamera = DrawCompFieldWithThisBtn<Behaviour>("摄像机", Target.objArguments[0], typeof(Camera), typeof(Cinemachine.CinemachineVirtualCamera));
 #else
-				Camera newCamera = DrawCompField<Camera>("摄像机", Target.objArguments[0]);
+				Camera newCamera = DrawCompFieldWithThisBtn<Camera>("摄像机", Target.objArguments[0]);
 #endif
 				if (newCamera != Target.objArguments[0]) {
 					Property.RecordForUndo("ObjArguments");

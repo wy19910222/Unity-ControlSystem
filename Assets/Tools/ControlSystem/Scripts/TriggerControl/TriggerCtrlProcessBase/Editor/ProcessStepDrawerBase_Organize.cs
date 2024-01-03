@@ -11,7 +11,7 @@ using UnityEditor;
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
 		private void DrawInstantiate() {
-			Transform newObj = DrawObjectField<Transform>("预制体", Target.obj);
+			Transform newObj = DrawObjectFieldWithThisBtn<Transform>("预制体", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -101,7 +101,7 @@ namespace Control {
 		}
 		
 		private void DrawDestroy() {
-			GameObject newObj = DrawObjectField<GameObject>("游戏对象", Target.obj);
+			GameObject newObj = DrawObjectFieldWithThisBtn<GameObject>("游戏对象", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -123,7 +123,7 @@ namespace Control {
 		}
 		
 		private void DrawParent() {
-			Transform newObj = DrawObjectField<Transform>("游戏对象", Target.obj);
+			Transform newObj = DrawObjectFieldWithThisBtn<Transform>("游戏对象", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -158,7 +158,7 @@ namespace Control {
 		}
 		
 		private void DrawActive() {
-			GameObject newObj = DrawObjectField<GameObject>("游戏对象", Target.obj);
+			GameObject newObj = DrawObjectFieldWithThisBtn<GameObject>("游戏对象", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -180,7 +180,7 @@ namespace Control {
 		}
 		
 		private void DrawEnabled() {
-			Component newObj = DrawCompField<Component>("组件", Target.obj, typeof(Behaviour), typeof(Renderer), typeof(Collider), typeof(LODGroup), typeof(Cloth));
+			Component newObj = DrawCompFieldWithThisBtn<Component>("组件", Target.obj, typeof(Behaviour), typeof(Renderer), typeof(Collider), typeof(LODGroup), typeof(Cloth));
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;

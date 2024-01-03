@@ -15,7 +15,7 @@ using Spine.Unity;
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
 		private void DrawSpineSetValue() {
-			Behaviour newObj = DrawCompField<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
+			Behaviour newObj = DrawCompFieldWithThisBtn<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -94,7 +94,7 @@ namespace Control {
 		}
 		
 		private void DrawSpineRestart() {
-			Behaviour newObj = DrawCompField<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
+			Behaviour newObj = DrawCompFieldWithThisBtn<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -117,7 +117,7 @@ namespace Control {
 		}
 
 		private void DrawSpineStop() {
-			Behaviour newObj = DrawCompField<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
+			Behaviour newObj = DrawCompFieldWithThisBtn<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;

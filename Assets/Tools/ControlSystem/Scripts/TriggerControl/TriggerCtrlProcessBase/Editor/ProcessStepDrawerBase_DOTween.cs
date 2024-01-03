@@ -13,7 +13,7 @@ using DG.Tweening.Core;
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
 		private void DrawDOTweenRestart() {
-			ABSAnimationComponent newObj = DrawCompField<ABSAnimationComponent>("缓动器", Target.obj);
+			ABSAnimationComponent newObj = DrawCompFieldWithThisBtn<ABSAnimationComponent>("缓动器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -54,7 +54,7 @@ namespace Control {
 			}
 		}
 		private void DrawDOTweenCtrl() {
-			ABSAnimationComponent newObj = DrawCompField<ABSAnimationComponent>("缓动器", Target.obj);
+			ABSAnimationComponent newObj = DrawCompFieldWithThisBtn<ABSAnimationComponent>("缓动器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -73,7 +73,7 @@ namespace Control {
 			}
 		}
 		private void DrawDOTweenGoto() {
-			ABSAnimationComponent newObj = DrawCompField<ABSAnimationComponent>("缓动器", Target.obj);
+			ABSAnimationComponent newObj = DrawCompFieldWithThisBtn<ABSAnimationComponent>("缓动器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
@@ -129,7 +129,7 @@ namespace Control {
 			}
 		}
 		private void DrawDOTweenLife() {
-			ABSAnimationComponent newObj = DrawCompField<ABSAnimationComponent>("缓动器", Target.obj);
+			ABSAnimationComponent newObj = DrawCompFieldWithThisBtn<ABSAnimationComponent>("缓动器", Target.obj);
 			if (newObj != Target.obj) {
 				Property.RecordForUndo("Obj");
 				Target.obj = newObj;
