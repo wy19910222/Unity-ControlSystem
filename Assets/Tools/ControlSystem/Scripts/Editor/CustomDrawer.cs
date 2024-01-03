@@ -576,7 +576,7 @@ namespace Control {
 			string path = property.stringValue;
 			UObject obj = AssetDatabase.LoadAssetAtPath<UObject>(path);
 			AssetPathAttribute assetPathAttribute = (AssetPathAttribute) attribute;
-			UObject newObj = EditorGUI.ObjectField(position, label, obj, assetPathAttribute.mainType ?? typeof(UObject));
+			UObject newObj = EditorGUI.ObjectField(position, label, obj, assetPathAttribute.mainType ?? typeof(UObject), true);
 			if (newObj
 				&& assetPathAttribute.constraintTypes != null
 				&& Array.TrueForAll(assetPathAttribute.constraintTypes, type => !type.IsInstanceOfType(newObj))
