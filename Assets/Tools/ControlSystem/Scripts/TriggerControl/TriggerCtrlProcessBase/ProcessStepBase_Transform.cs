@@ -110,13 +110,13 @@ namespace Control {
 				
 				int part = GetIArgument(1);
 				Vector3 SetValue(Vector3 origin, Vector3 cover) {
-					if ((part & (int) TriggerCtrlTransPart.X) != 0) {
+					if ((part & (int) Vector3Part.X) != 0) {
 						origin.x = cover.x;
 					}
-					if ((part & (int) TriggerCtrlTransPart.Y) != 0) {
+					if ((part & (int) Vector3Part.Y) != 0) {
 						origin.y = cover.y;
 					}
-					if ((part & (int) TriggerCtrlTransPart.Z) != 0) {
+					if ((part & (int) Vector3Part.Z) != 0) {
 						origin.z = cover.z;
 					}
 					return origin;
@@ -145,7 +145,7 @@ namespace Control {
 						}
 						// localEulerAngles
 						case 1: {
-							if (part == (int) TriggerCtrlTransPart.XYZ) {
+							if (part == (int) Vector3Part.XYZ) {
 								Quaternion rotationFrom = trans.localRotation;
 								Quaternion rotationTo = Quaternion.Euler(relative ? trans.localEulerAngles + value : value);
 								float temp = 0;
@@ -192,7 +192,7 @@ namespace Control {
 						}
 						// eulerAngles
 						case 4: {
-							if (part == (int) TriggerCtrlTransPart.XYZ) {
+							if (part == (int) Vector3Part.XYZ) {
 								Quaternion rotationFrom = trans.rotation;
 								Quaternion rotationTo = Quaternion.Euler(relative ? trans.eulerAngles + value : value);
 								float temp = 0;

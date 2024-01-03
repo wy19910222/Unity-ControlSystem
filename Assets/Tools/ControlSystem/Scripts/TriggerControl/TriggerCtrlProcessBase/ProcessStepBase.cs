@@ -60,7 +60,7 @@ namespace Control {
 		// Transform trans, int[0] lookPart, int[1] upPart, Transform[0] target
 		LOOK_AT = 32,	// tween
 		// Transform trans, Camera/CinemachineVirtualCamera[0] camera, int[0] part, float[0] xAnchor, float[1] yAnchor, float[2] zAnchor
-		CAMERA_ANCHOR,	// tween
+		CAMERA_ANCHOR = 33,	// tween
 		
 		// AudioClip clip, float[0] volumeScale
 		AUDIO_ONE_SHOT = 41,
