@@ -99,14 +99,6 @@ namespace Control {
 			}
 				
 			if (GUILayout.Button("触发", GUILayout.Width(s_ContextWidth * 0.18F))) {
-				int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-				BaseTriggerCtrl trigger = null;
-				for (int i = 0; i < valueCount; i++) {
-					trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
-					if (trigger != null) {
-						break;
-					}
-				}
 				if (Target.obj) {
 					Undo.RecordObject(Target.obj, "Trigger");
 				}
@@ -115,7 +107,7 @@ namespace Control {
 						Undo.RecordObject(objArgument, "Trigger");
 					}
 				}
-				Target.DoStep(trigger);
+				Target.DoStep(GetTargetTrigger());
 			}
 			PropertyInfo isTriggeredPI = typeof(ProcessStepBase).GetProperty("IsTriggered", BindingFlags.Instance | BindingFlags.NonPublic);
 			bool isTriggered = isTriggeredPI?.GetValue(Target) is bool _isTriggered && _isTriggered;
@@ -257,9 +249,9 @@ namespace Control {
 
 		protected void DrawUnityEvent() {
 			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			TriggerCtrlProcessBase<ProcessStepBase> trigger = null;
+			TriggerProcessBase<ProcessStepBase> trigger = null;
 			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as TriggerCtrlProcessBase<ProcessStepBase>;
+				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as TriggerProcessBase<ProcessStepBase>;
 				if (trigger != null) {
 					break;
 				}
@@ -363,17 +355,17 @@ namespace Control {
 		}
 
 		protected void SetDirty() {
-			BaseTriggerCtrl trigger = GetTargetTrigger();
+			BaseTrigger trigger = GetTargetTrigger();
 			if (trigger != null) {
 				EditorUtility.SetDirty(trigger);
 			}
 		}
 
-		protected BaseTriggerCtrl GetTargetTrigger() {
-			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			BaseTriggerCtrl trigger = null;
-			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
+		protected BaseTrigger GetTargetTrigger() {
+			BaseTrigger trigger = null;
+			IPropertyValueEntry valueEntry = Property.SerializationRoot.ValueEntry;
+			for (int i = 0, valueCount = valueEntry.ValueCount; i < valueCount; i++) {
+				trigger = valueEntry.WeakValues[i] as BaseTrigger;
 				if (trigger != null) {
 					break;
 				}

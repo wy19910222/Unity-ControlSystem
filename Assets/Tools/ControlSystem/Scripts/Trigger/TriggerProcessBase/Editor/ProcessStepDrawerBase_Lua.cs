@@ -25,15 +25,7 @@ namespace Control {
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("参数", CustomEditorGUI.LabelWidthOption);
-			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			BaseTriggerCtrl trigger = null;
-			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
-				if (trigger != null) {
-					break;
-				}
-			}
-			InjectionDrawer.DrawDict(Target.luaInjectionList, trigger, true);
+			InjectionDrawer.DrawDict(Target.luaInjectionList, GetTargetTrigger(), true);
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
@@ -89,16 +81,7 @@ namespace Control {
 			}
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("参数", CustomEditorGUI.LabelWidthOption);
-			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			BaseTriggerCtrl trigger = null;
-			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
-				if (trigger != null) {
-					break;
-				}
-			}
-
-			InjectionDrawer.DrawSingle(Target.luaInjectionList[0], trigger, true);
+			InjectionDrawer.DrawSingle(Target.luaInjectionList[0], GetTargetTrigger(), true);
 			EditorGUILayout.EndHorizontal();
 		}
 
@@ -150,15 +133,7 @@ namespace Control {
 			}
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("参数", CustomEditorGUI.LabelWidthOption);
-			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			BaseTriggerCtrl trigger = null;
-			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseTriggerCtrl;
-				if (trigger != null) {
-					break;
-				}
-			}
-			InjectionDrawer.DrawList(Target.luaInjectionList, trigger, true);
+			InjectionDrawer.DrawList(Target.luaInjectionList, GetTargetTrigger(), true);
 			EditorGUILayout.EndHorizontal();
 		}
 	}

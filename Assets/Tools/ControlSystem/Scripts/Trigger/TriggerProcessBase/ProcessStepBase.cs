@@ -18,8 +18,8 @@ namespace Control {
 		// triggerType说明：0-依次, 1-随机
 		// shuffleType说明：0-不洗牌, 1-仅洗一次, 2-循环时洗牌
 		// randomType说明：0-无限制, 1-不重复
-		// BaseTriggerCtrl[] triggers, int[0] triggerCount, int[1] triggerType, int[2] shuffleType
-		// BaseTriggerCtrl[] triggers, int[0] triggerCount, int[1] triggerType, int[2] randomType
+		// BaseTrigger[] triggers, int[0] triggerCount, int[1] triggerType, int[2] shuffleType
+		// BaseTrigger[] triggers, int[0] triggerCount, int[1] triggerType, int[2] randomType
 		TRIGGER = 0,
 		// StateController cState, bool[0] isRelative, int[0] offset, bool[1] loop
 		// StateController cState, bool[0] isRelative, bool[1] recordIndex, bool[2] random, int[0] uid
@@ -175,7 +175,7 @@ namespace Control {
 			iArguments.Add(0);	// shuffleType/randomType
 		}
 		
-		public virtual void DoStep(BaseTriggerCtrl trigger) {
+		public virtual void DoStep(BaseTrigger trigger) {
 #if UNITY_EDITOR
 			IsTriggered = true;
 #endif

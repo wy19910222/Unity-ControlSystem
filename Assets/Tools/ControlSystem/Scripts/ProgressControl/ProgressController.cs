@@ -40,7 +40,7 @@ namespace Control {
 	
 	[Serializable]
 	public class ProgressRelateTrigger : ProgressRelate {
-		public BaseTriggerCtrl trigger;
+		public BaseTrigger trigger;
 		public bool canTriggerAgain;
 		public bool triggered;
 	}

@@ -14,7 +14,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 
 namespace Control {
-	public partial class TriggerCtrlProcessBase<T> {
+	public partial class TriggerProcessBase<T> {
 		protected override bool IsTriggered {
 			get => base.IsTriggered;
 			set {

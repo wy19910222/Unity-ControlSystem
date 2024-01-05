@@ -49,7 +49,7 @@ namespace Control {
 
 	[Serializable]
 	public class StateRelateTrigger : StateRelate {
-		public BaseTriggerCtrl trigger;
+		public BaseTrigger trigger;
 	}
 
 	public class StateController : MonoBehaviour {

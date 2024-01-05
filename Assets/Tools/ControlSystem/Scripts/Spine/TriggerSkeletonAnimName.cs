@@ -7,31 +7,29 @@
 
 #if SPINE_EXIST
 
-using Spine;
 using Spine.Unity;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerCtrlSkeletonLoop : TriggerCtrlTrigger {
+	public class TriggerSkeletonAnimName : BaseTrigger {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;
 		[HideIf("@skeletonAnimation")]
 		[ComponentSelect]
 		public SkeletonGraphic skeletonGraphic;
-		public bool loop;
+		[SkeletonAnimationNameSelect("skeletonAnimation", "skeletonGraphic")]
+		public string animationName;
 		
 		protected override void DoTrigger() {
-			SkeletonAnimation sa = skeletonAnimation ? skeletonAnimation : GetComponent<SkeletonAnimation>();
+			SkeletonAnimation sa = GetComponent<SkeletonAnimation>();
 			if (sa) {
-				sa.loop = loop;
+				sa.AnimationName = animationName;
 			}
-			SkeletonGraphic sg = skeletonGraphic ? skeletonGraphic : GetComponent<SkeletonGraphic>();
+			SkeletonGraphic sg = GetComponent<SkeletonGraphic>();
 			if (sg) {
-				TrackEntry entry = sg.AnimationState?.GetCurrent(0);
-				if (entry != null) {
-					entry.Loop = loop;
-				}
+				bool loop = sg.AnimationState?.GetCurrent(0)?.Loop ?? false;
+				sg.AnimationState?.SetAnimation(0, animationName, loop);
 			}
 		}
 	}

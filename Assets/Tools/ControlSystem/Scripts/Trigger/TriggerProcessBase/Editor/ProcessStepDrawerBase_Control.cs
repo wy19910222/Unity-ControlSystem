@@ -22,21 +22,21 @@ namespace Control {
 						EditorGUI.LabelField(leftRect, $"触发器列表({Target.objArguments.Count})");
 						Rect middleRect = new Rect(rect.x + rect.width - 124 - 1, rect.y - 1, 100, rect.height + 2);
 						if (GUI.Button(middleRect, "添加选中对象")) {
-							List<BaseTriggerCtrl> list = new List<BaseTriggerCtrl>();
+							List<BaseTrigger> list = new List<BaseTrigger>();
 							foreach (var obj in Selection.objects) {
 								switch (obj) {
 									case GameObject go: {
-										BaseTriggerCtrl trigger = go.GetComponent<BaseTriggerCtrl>();
+										BaseTrigger trigger = go.GetComponent<BaseTrigger>();
 										if (trigger) {
 											list.Add(trigger);
 										}
 										break;
 									}
 									case Component comp: {
-										if (comp is BaseTriggerCtrl trigger) {
+										if (comp is BaseTrigger trigger) {
 											list.Add(trigger);
 										} else {
-											trigger = comp.GetComponent<BaseTriggerCtrl>();
+											trigger = comp.GetComponent<BaseTrigger>();
 											if (trigger) {
 												list.Add(trigger);
 											}
@@ -55,7 +55,7 @@ namespace Control {
 					},
 					drawElementCallback = (rect, index, isActive, isFocused) => {
 						Rect leftRect = new Rect(rect.x, rect.y + 1, rect.width - 24, rect.height - 2);
-						Target.objArguments[index] = DrawCompField<BaseTriggerCtrl>(leftRect, "", Target.objArguments[index]);
+						Target.objArguments[index] = DrawCompField<BaseTrigger>(leftRect, "", Target.objArguments[index]);
 						Rect rightRect = new Rect(leftRect.x + leftRect.width + 2, rect.y + 1, 28, rect.height - 2);
 						if (GUI.Button(rightRect, "×")) {
 							EditorApplication.delayCall += () => Target.objArguments.RemoveAt(index);

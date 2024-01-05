@@ -13,7 +13,7 @@ using Sirenix.OdinInspector;
 #endif
 
 namespace Control {
-	public abstract class BaseTriggerCtrl : MonoBehaviour {
+	public abstract class BaseTrigger : MonoBehaviour {
 #if UNITY_EDITOR
 		[OnInspectorGUI("DrawTriggerButton", false)]
 #endif

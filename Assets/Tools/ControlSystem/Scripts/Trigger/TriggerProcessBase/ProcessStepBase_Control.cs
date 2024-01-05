@@ -19,13 +19,13 @@ namespace Control {
 				case 0:
 					break;
 				case 1: {
-					if (objArguments[0] is BaseTriggerCtrl trigger) {
+					if (objArguments[0] is BaseTrigger trigger) {
 						trigger.Trigger();
 					}
 					break;
 				}
 				default: {
-					List<BaseTriggerCtrl> triggerList = new List<BaseTriggerCtrl>();
+					List<BaseTrigger> triggerList = new List<BaseTrigger>();
 					if (m_PrevTriggersIndexList == null) {
 						m_PrevTriggersIndexList = new List<int>();
 					}
@@ -66,7 +66,7 @@ namespace Control {
 									index -= totalCount;
 								}
 								m_PrevTriggersIndexList.Add(index);
-								triggerList.Add(objArguments[index] as BaseTriggerCtrl);
+								triggerList.Add(objArguments[index] as BaseTrigger);
 							}
 							break;
 						case 1:
@@ -83,7 +83,7 @@ namespace Control {
 								int index = indexList[indexIndex];
 								indexList.RemoveAt(indexIndex);
 								m_PrevTriggersIndexList.Add(index);
-								triggerList.Add(objArguments[index] as BaseTriggerCtrl);
+								triggerList.Add(objArguments[index] as BaseTrigger);
 							}
 							break;
 					}

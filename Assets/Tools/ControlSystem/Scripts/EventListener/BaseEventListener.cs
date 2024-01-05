@@ -13,7 +13,7 @@ namespace Control {
 	public class BaseEventListener : MonoBehaviour {
 		public string title;
 		[ComponentSelect]
-		public List<BaseTriggerCtrl> triggers = new List<BaseTriggerCtrl>();
+		public List<BaseTrigger> triggers = new List<BaseTrigger>();
 		
 		private Action m_OnEvent;
 
@@ -28,8 +28,8 @@ namespace Control {
 			m_OnEvent += action;
 		}
 		
-		public void OffEvent(Action action) {
-			m_OnEvent -= action;
+		public void OffTrigger(Action action) {
+			m_OnTrigger -= action;
 		}
 	}
 }

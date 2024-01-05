@@ -11,7 +11,7 @@ using Spine.Unity;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerCtrlSkeletonSpeed : TriggerCtrlTrigger {
+	public class TriggerSkeletonSpeed : BaseTrigger {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;

@@ -14,7 +14,7 @@ using UnityEngine;
 using AnimationState = Spine.AnimationState;
 
 namespace Control {
-	public class TriggerCtrlSkeletonRestart : TriggerCtrlTrigger {
+	public class TriggerSkeletonRestart : BaseTrigger {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;

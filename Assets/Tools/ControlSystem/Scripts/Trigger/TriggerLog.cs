@@ -11,15 +11,15 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Control {
-	public enum TriggerCtrlLogLevel {
+	public enum TriggerLogLevel {
 		NONE,
 		ERROR,
 		WARNING,
 		LOG,
 	}
 	
-	public class TriggerCtrlLog : BaseTriggerCtrl {
-		public TriggerCtrlLogLevel level = TriggerCtrlLogLevel.LOG;
+	public class TriggerLog : BaseTrigger {
+		public TriggerLogLevel level = TriggerLogLevel.LOG;
 		public string message;
 		public Object context;
 		public bool showTime;
@@ -27,15 +27,15 @@ namespace Control {
 		protected override void DoTrigger() {
 			string msg = showTime ? $"[{DateTime.Now:HH:mm:ss.fff} {Time.frameCount}]{message}" : message;
 			switch (level) {
-				case TriggerCtrlLogLevel.NONE:
+				case TriggerLogLevel.NONE:
 					break;
-				case TriggerCtrlLogLevel.ERROR:
+				case TriggerLogLevel.ERROR:
 					Debug.LogError(msg, context);
 					break;
-				case TriggerCtrlLogLevel.WARNING:
+				case TriggerLogLevel.WARNING:
 					Debug.LogWarning(msg, context);
 					break;
-				case TriggerCtrlLogLevel.LOG:
+				case TriggerLogLevel.LOG:
 					Debug.Log(msg, context);
 					break;
 				default:

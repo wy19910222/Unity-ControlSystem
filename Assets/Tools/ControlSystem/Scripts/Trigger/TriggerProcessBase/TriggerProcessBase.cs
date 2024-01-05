@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	public partial class TriggerCtrlProcessBase<T> : BaseTriggerCtrl where T : ProcessStepBase, new() {
+	public partial class TriggerProcessBase<T> : BaseTrigger where T : ProcessStepBase, new() {
 		public bool singleProcess;
 		// [SerializeReference]
 		public List<T> steps = new List<T>();
