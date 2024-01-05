@@ -473,10 +473,10 @@ namespace Control {
 		}
 
 		private void DrawProgressRelations(IList<ProgressRelateProgress> relations) {
-			bool fold = EditorPrefs.GetBool("DrawRelations", false);
+			bool fold = EditorPrefs.GetBool("DrawProgressRelations", false);
 			bool newFold = GUILayout.Toggle(fold, fold ? "\u25BA 关联进度控制:" : "\u25BC 关联进度控制:", "BoldLabel");
 			if (newFold != fold) {
-				EditorPrefs.SetBool("DrawRelations", newFold);
+				EditorPrefs.SetBool("DrawProgressRelations", newFold);
 			}
 			if (!newFold) {
 				if (relations.Count > 0) {
