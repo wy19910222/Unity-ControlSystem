@@ -335,7 +335,7 @@ namespace Control {
 
 		private void DrawCustomEvent() {
 			EditorGUILayout.BeginHorizontal();
-			string newEventName = EditorGUILayout.TextField("事件", Target.sArguments[0]);
+			string newEventName = EditorGUILayout.TextField("事件名", Target.sArguments[0]);
 			if (newEventName != Target.sArguments[0]) {
 				Property.RecordForUndo("SArguments");
 				Target.sArguments[0] = newEventName;

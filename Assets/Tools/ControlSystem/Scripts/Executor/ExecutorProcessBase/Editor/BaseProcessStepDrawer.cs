@@ -498,6 +498,7 @@ namespace Control {
 			{ProcessStepTypeBase.EXECUTOR, "执行"},
 			{ProcessStepTypeBase.STATE_CONTROLLER, "状态控制"},
 			{ProcessStepTypeBase.PROGRESS_CONTROLLER, "进度控制"},
+			{ProcessStepTypeBase.CUSTOM_EVENT, "自定义事件"},
 			
 			{ProcessStepTypeBase.INSTANTIATE, "组织 - 实例化"},
 			{ProcessStepTypeBase.DESTROY, "组织 - 销毁"},
@@ -538,8 +539,6 @@ namespace Control {
 			{ProcessStepTypeBase.LUA_SET_VALUE, "Lua - 赋值"},
 			{ProcessStepTypeBase.LUA_FUNCTION_INVOKE, "Lua - 函数调用"},
 #endif
-			
-			{ProcessStepTypeBase.CUSTOM_EVENT, "自定义事件"},
 			{ProcessStepTypeBase.UNITY_EVENT, "Unity事件"},
 		};
 	}

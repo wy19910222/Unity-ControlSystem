@@ -225,7 +225,7 @@ namespace Control {
 			string eventName = GetSArgument(0);
 			bool broadcast = GetBArgument(0);
 			if (broadcast) {
-				CustomListener.Emit(eventName);
+				CustomEventListener.Emit(eventName);
 			} else {
 				GameObject target = GetObjArgument<GameObject>(0);
 				if (target) {
