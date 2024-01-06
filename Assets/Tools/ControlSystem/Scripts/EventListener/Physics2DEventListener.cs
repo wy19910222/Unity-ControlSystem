@@ -25,6 +25,9 @@ namespace Control {
 		[Tooltip("勾选后，双方任一勾选isTrigger都能响应Trigger相关回调")]
 		public bool triggerSelf = true;
 		public bool checkColliderEnabled;
+		
+		protected override bool StateControllerEnabled => false;
+		protected override bool ProgressControllerEnabled => false;
 
 		private void OnTriggerEnter2D(Collider2D other) {
 			if (enabled && type == Physics2DEventType.ON_TRIGGER_ENTER_2D && (triggerSelf || other.isTrigger)) {

@@ -13,6 +13,9 @@ namespace Control {
 	
 	public class EnabledEventListener : BaseEventListener {
 		public EnabledEventType type = EnabledEventType.ON_ENABLE;
+		
+		protected override bool StateControllerEnabled => false;
+		protected override bool ProgressControllerEnabled => false;
 
 		private void OnEnable() {
 			if (type == EnabledEventType.ON_ENABLE) {
