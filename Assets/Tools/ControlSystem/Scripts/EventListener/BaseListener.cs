@@ -20,9 +20,9 @@ namespace Control {
 		[ComponentSelect, ShowIf("@ExecutorEnabled")]
 		public List<BaseExecutor> executors = new List<BaseExecutor>();
 
-		protected virtual bool StateControllerEnabled => true;
-		protected virtual bool ProgressControllerEnabled => true;
-		protected virtual bool ExecutorEnabled => true;
+		protected virtual bool StateControllerEnabled => false;
+		protected virtual bool ProgressControllerEnabled => false;
+		protected virtual bool ExecutorEnabled => false;
 
 		protected virtual void SetState(int stateIndex) {
 			foreach (var stateController in stateControllers) {

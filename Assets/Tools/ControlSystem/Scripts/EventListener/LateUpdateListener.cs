@@ -31,8 +31,7 @@ namespace Control {
 		[LabelText("Interval")]
 		public float secondsInterval = 1;
 		
-		protected override bool StateControllerEnabled => false;
-		protected override bool ProgressControllerEnabled => false;
+		protected override bool ExecutorEnabled => true;
 
 		private int m_Frames;
 		private float m_Seconds;

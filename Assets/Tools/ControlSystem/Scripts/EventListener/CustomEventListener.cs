@@ -13,6 +13,8 @@ using UnityEngine;
 namespace Control {
 	public class CustomEventListener : BaseListener {
 		public string eventName;
+		
+		protected override bool ExecutorEnabled => true;
 
 		private void Awake() {
 			On(eventName, this);

@@ -26,8 +26,7 @@ namespace Control {
 		public bool triggerSelf = true;
 		public bool checkColliderEnabled;
 		
-		protected override bool StateControllerEnabled => false;
-		protected override bool ProgressControllerEnabled => false;
+		protected override bool ExecutorEnabled => true;
 
 		private void OnTriggerEnter2D(Collider2D other) {
 			if (enabled && type == Physics2DEventType.ON_TRIGGER_ENTER_2D && (triggerSelf || other.isTrigger)) {

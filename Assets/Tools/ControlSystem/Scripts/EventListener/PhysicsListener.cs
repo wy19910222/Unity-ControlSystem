@@ -26,8 +26,7 @@ namespace Control {
 		public bool triggerSelf = true;
 		public bool checkColliderEnabled;
 		
-		protected override bool StateControllerEnabled => false;
-		protected override bool ProgressControllerEnabled => false;
+		protected override bool ExecutorEnabled => true;
 		
 		private void OnTriggerEnter(Collider other) {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_ENTER && (triggerSelf || other.isTrigger)) {

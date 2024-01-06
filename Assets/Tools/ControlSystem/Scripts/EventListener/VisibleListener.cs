@@ -14,8 +14,7 @@ namespace Control {
 	public class VisibleListener : BaseListener {
 		public VisibleEventType type = VisibleEventType.ON_BECAME_INVISIBLE;
 		
-		protected override bool StateControllerEnabled => false;
-		protected override bool ProgressControllerEnabled => false;
+		protected override bool ExecutorEnabled => true;
 
 		private void OnBecameVisible() {
 			if (enabled && type == VisibleEventType.ON_BECAME_INVISIBLE) {
