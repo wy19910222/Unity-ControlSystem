@@ -19,54 +19,33 @@ namespace Control {
 		public List<ProgressController> progressControllers = new List<ProgressController>();
 		[ComponentSelect, ShowIf("@ExecutorEnabled")]
 		public List<BaseExecutor> executors = new List<BaseExecutor>();
-		
-		private Action<int> m_OnStateChange;
-		private Action<float> m_OnProgressChange;
-		private Action m_OnExecute;
 
-		protected virtual void SetState(int index) {
+		protected virtual bool StateControllerEnabled => true;
+		protected virtual bool ProgressControllerEnabled => true;
+		protected virtual bool ExecutorEnabled => true;
+
+		protected virtual void SetState(int stateIndex) {
 			foreach (var stateController in stateControllers) {
-				stateController.Index = index;
+				stateController.Index = stateIndex;
 			}
-			m_OnStateChange?.Invoke(index);
+		}
+
+		protected virtual void SetState(string stateName) {
+			foreach (var stateController in stateControllers) {
+				stateController.State = stateName;
+			}
 		}
 
 		protected virtual void SetProgress(float progress) {
 			foreach (var progressController in progressControllers) {
 				progressController.Progress = progress;
 			}
-			m_OnProgressChange?.Invoke(progress);
 		}
 
 		protected virtual void Execute() {
 			foreach (var executor in executors) {
 				executor.Execute();
 			}
-			m_OnExecute?.Invoke();
-		}
-
-		protected virtual bool StateControllerEnabled => true;
-		public void OnStateChange(Action<int> action) {
-			m_OnStateChange += action;
-		}
-		public void OffStateChange(Action<int> action) {
-			m_OnStateChange -= action;
-		}
-		
-		protected virtual bool ProgressControllerEnabled => true;
-		public void OnProgressChange(Action<float> action) {
-			m_OnProgressChange += action;
-		}
-		public void OffProgressChange(Action<float> action) {
-			m_OnProgressChange -= action;
-		}
-		
-		protected virtual bool ExecutorEnabled => true;
-		public void OnExecute(Action action) {
-			m_OnExecute += action;
-		}
-		public void OffExecute(Action action) {
-			m_OnExecute -= action;
 		}
 	}
 }
