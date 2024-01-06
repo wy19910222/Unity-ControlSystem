@@ -39,10 +39,10 @@ namespace Control {
 	}
 	
 	[Serializable]
-	public class ProgressRelateTrigger : ProgressRelate {
-		public BaseTrigger trigger;
-		public bool canTriggerAgain;
-		public bool triggered;
+	public class ProgressRelateExecutor : ProgressRelate {
+		public BaseExecutor executor;
+		public bool canExecuteAgain;
+		public bool executed;
 	}
 
 	public class ProgressController : MonoBehaviour {
@@ -50,7 +50,7 @@ namespace Control {
 		public float initialProgress;
 		public List<ProgressRelateProgress> relations = new List<ProgressRelateProgress>();
 		public List<ProgressRelateState> stateRelations = new List<ProgressRelateState>();
-		public List<ProgressRelateTrigger> triggerRelations = new List<ProgressRelateTrigger>();
+		public List<ProgressRelateExecutor> executorRelations = new List<ProgressRelateExecutor>();
 
 		public bool lazyInit;
 		public bool invalidateTween;
@@ -84,7 +84,7 @@ namespace Control {
 			initialProgress = 0;
 			relations.Clear();
 			stateRelations.Clear();
-			triggerRelations.Clear();
+			executorRelations.Clear();
 			m_PrevProgress = 0;
 			m_Progress = 0;
 		}
@@ -208,15 +208,15 @@ namespace Control {
 					DelayCall(relation.delay, () => relation.controller.Index = index, relation);
 				}
 			}
-			foreach (var relation in triggerRelations) {
-				if (relation.trigger && relation.minProgress <= m_Progress && relation.maxProgress >= m_Progress) {
-					if (relation.canTriggerAgain || !relation.triggered) {
-						relation.triggered = true;
-						DelayCall(relation.delay, () => relation.trigger.Trigger(), relation);
+			foreach (var relation in executorRelations) {
+				if (relation.executor && relation.minProgress <= m_Progress && relation.maxProgress >= m_Progress) {
+					if (relation.canExecuteAgain || !relation.executed) {
+						relation.executed = true;
+						DelayCall(relation.delay, () => relation.executor.Execute(), relation);
 					}
 				} else {
-					if (relation.triggered) {
-						relation.triggered = false;
+					if (relation.executed) {
+						relation.executed = false;
 					}
 				}
 			}

@@ -14,13 +14,13 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 
 namespace Control {
-	public partial class TriggerProcessBase<T> {
-		protected override bool IsTriggered {
-			get => base.IsTriggered;
+	public partial class ExecutorProcessBase<T> {
+		protected override bool IsExecuted {
+			get => base.IsExecuted;
 			set {
-				base.IsTriggered = value;
+				base.IsExecuted = value;
 				if (!value) {
-					PropertyInfo pi = typeof(ProcessStepBase).GetProperty("IsTriggered", BindingFlags.Instance | BindingFlags.NonPublic);
+					PropertyInfo pi = typeof(ProcessStepBase).GetProperty("IsExecuted", BindingFlags.Instance | BindingFlags.NonPublic);
 					if (pi != null) {
 						foreach (var step in steps) {
 							pi.SetValue(step, false);
@@ -30,15 +30,15 @@ namespace Control {
 			}
 		}
 		
-		protected override void BeforeEditorTrigger() {
-			base.BeforeEditorTrigger();
+		protected override void BeforeEditorExecute() {
+			base.BeforeEditorExecute();
 			foreach (var step in steps) {
 				if (step.obj) {
-					Undo.RecordObject(step.obj, "Trigger");
+					Undo.RecordObject(step.obj, "Executor");
 				}
 				foreach (var objArgument in step.objArguments) {
 					if (objArgument) {
-						Undo.RecordObject(objArgument, "Trigger");
+						Undo.RecordObject(objArgument, "Executor");
 					}
 				}
 			}

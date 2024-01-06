@@ -33,7 +33,7 @@ namespace Control {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_ENTER && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -43,7 +43,7 @@ namespace Control {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_STAY && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -53,7 +53,7 @@ namespace Control {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_EXIT && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -63,7 +63,7 @@ namespace Control {
 			if (enabled && type == PhysicsEventType.ON_COLLISION_ENTER) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -73,7 +73,7 @@ namespace Control {
 			if (enabled && type == PhysicsEventType.ON_COLLISION_STAY) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -83,7 +83,7 @@ namespace Control {
 			if (enabled && type == PhysicsEventType.ON_COLLISION_EXIT) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}

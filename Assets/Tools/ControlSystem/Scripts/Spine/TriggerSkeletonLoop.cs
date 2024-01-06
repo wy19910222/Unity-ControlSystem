@@ -12,7 +12,7 @@ using Spine.Unity;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerSkeletonLoop : BaseTrigger {
+	public class ExecutorSkeletonLoop : BaseExecutor {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;
@@ -21,7 +21,7 @@ namespace Control {
 		public SkeletonGraphic skeletonGraphic;
 		public bool loop;
 		
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			SkeletonAnimation sa = skeletonAnimation ? skeletonAnimation : GetComponent<SkeletonAnimation>();
 			if (sa) {
 				sa.loop = loop;

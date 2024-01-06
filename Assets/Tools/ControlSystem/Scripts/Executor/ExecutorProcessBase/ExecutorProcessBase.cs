@@ -11,14 +11,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	public partial class TriggerProcessBase<T> : BaseTrigger where T : ProcessStepBase, new() {
+	public partial class ExecutorProcessBase<T> : BaseExecutor where T : ProcessStepBase, new() {
 		public bool singleProcess;
 		// [SerializeReference]
 		public List<T> steps = new List<T>();
 	
 		private Coroutine m_Co;
 	
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			if (singleProcess) {
 				StopProcess();
 			}

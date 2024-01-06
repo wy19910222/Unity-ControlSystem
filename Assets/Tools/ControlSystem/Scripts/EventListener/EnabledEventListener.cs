@@ -19,13 +19,13 @@ namespace Control {
 
 		private void OnEnable() {
 			if (type == EnabledEventType.ON_ENABLE) {
-				Trigger();
+				Execute();
 			}
 		}
 
 		private void OnDisable() {
 			if (type == EnabledEventType.ON_DISABLE) {
-				Trigger();
+				Execute();
 			}
 		}
 	}

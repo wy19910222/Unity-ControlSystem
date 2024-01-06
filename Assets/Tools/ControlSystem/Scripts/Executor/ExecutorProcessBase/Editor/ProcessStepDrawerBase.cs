@@ -98,22 +98,22 @@ namespace Control {
 				Target.Type = baseType;
 			}
 				
-			if (GUILayout.Button("触发", GUILayout.Width(s_ContextWidth * 0.18F))) {
+			if (GUILayout.Button("执行", GUILayout.Width(s_ContextWidth * 0.18F))) {
 				if (Target.obj) {
-					Undo.RecordObject(Target.obj, "Trigger");
+					Undo.RecordObject(Target.obj, "Execute");
 				}
 				foreach (var objArgument in Target.objArguments) {
 					if (objArgument) {
-						Undo.RecordObject(objArgument, "Trigger");
+						Undo.RecordObject(objArgument, "Execute");
 					}
 				}
-				Target.DoStep(GetTargetTrigger());
+				Target.DoStep(GetTargetExecutor());
 			}
-			PropertyInfo isTriggeredPI = typeof(ProcessStepBase).GetProperty("IsTriggered", BindingFlags.Instance | BindingFlags.NonPublic);
-			bool isTriggered = isTriggeredPI?.GetValue(Target) is bool _isTriggered && _isTriggered;
+			PropertyInfo isExecutedPI = typeof(ProcessStepBase).GetProperty("IsExecuted", BindingFlags.Instance | BindingFlags.NonPublic);
+			bool isExecuted = isExecutedPI?.GetValue(Target) is true;
 			GUILayoutOption widthToggle = GUILayout.Width(s_ContextWidth * 0.12F - 3F);
-			if (DrawToggle(isTriggered, isTriggered ? "●" : "○", widthToggle) != isTriggered) {
-				isTriggeredPI?.SetValue(Target, false);
+			if (DrawToggle(isExecuted, isExecuted ? "●" : "○", widthToggle) != isExecuted) {
+				isExecutedPI?.SetValue(Target, false);
 			}
 			EditorGUILayout.EndHorizontal();
 		}
@@ -135,8 +135,8 @@ namespace Control {
 		
 		protected virtual void DrawFeature() {
 			switch (Target.Type) {
-				case ProcessStepTypeBase.TRIGGER:
-					DrawTrigger();
+				case ProcessStepTypeBase.EXECUTOR:
+					DrawExecutor();
 					break;
 				case ProcessStepTypeBase.STATE_CONTROLLER:
 					DrawStateController();
@@ -249,20 +249,20 @@ namespace Control {
 
 		protected void DrawUnityEvent() {
 			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			TriggerProcessBase<ProcessStepBase> trigger = null;
+			ExecutorProcessBase<ProcessStepBase> executor = null;
 			for (int i = 0; i < valueCount; i++) {
-				trigger = Property.SerializationRoot.ValueEntry.WeakValues[i] as TriggerProcessBase<ProcessStepBase>;
-				if (trigger != null) {
+				executor = Property.SerializationRoot.ValueEntry.WeakValues[i] as ExecutorProcessBase<ProcessStepBase>;
+				if (executor != null) {
 					break;
 				}
 			}
-			if (trigger != null) {
+			if (executor != null) {
 				EditorGUILayout.BeginHorizontal();
 				EditorGUILayout.LabelField("事件", CustomEditorGUI.LabelWidthOption);
 				
-				int index = trigger.steps.IndexOf(Target);
+				int index = executor.steps.IndexOf(Target);
 				if (index != -1) {
-					SerializedObject serializedObject = new SerializedObject(trigger);
+					SerializedObject serializedObject = new SerializedObject(executor);
 					SerializedProperty serializedProperty = serializedObject.FindProperty("steps")
 							.GetArrayElementAtIndex(index)
 							.FindPropertyRelative("unityEvent");
@@ -315,7 +315,7 @@ namespace Control {
 		protected T DrawObjectFieldWithThisBtn<T>(string text, UObject obj) where T : UObject {
 			EditorGUILayout.BeginHorizontal();
 			T newObj = DrawObjectField<T>(text, obj);
-			GameObject go = GetTargetTrigger()?.gameObject;
+			GameObject go = GetTargetExecutor()?.gameObject;
 			if (go) {
 				if (typeof(T) == typeof(GameObject)) {
 					CustomEditorGUI.BeginDisabled(newObj == go);
@@ -340,7 +340,7 @@ namespace Control {
 			EditorGUILayout.BeginHorizontal();
 			T newObj = DrawCompField<T>(text, obj, types);
 			if (!newObj) {
-				GameObject go = GetTargetTrigger()?.gameObject;
+				GameObject go = GetTargetExecutor()?.gameObject;
 				if (go) {
 					T comp = go.GetComponent<T>();
 					CustomEditorGUI.BeginDisabled(!comp);
@@ -355,22 +355,22 @@ namespace Control {
 		}
 
 		protected void SetDirty() {
-			BaseTrigger trigger = GetTargetTrigger();
-			if (trigger != null) {
-				EditorUtility.SetDirty(trigger);
+			BaseExecutor executor = GetTargetExecutor();
+			if (executor != null) {
+				EditorUtility.SetDirty(executor);
 			}
 		}
 
-		protected BaseTrigger GetTargetTrigger() {
-			BaseTrigger trigger = null;
+		protected BaseExecutor GetTargetExecutor() {
+			BaseExecutor executor = null;
 			IPropertyValueEntry valueEntry = Property.SerializationRoot.ValueEntry;
 			for (int i = 0, valueCount = valueEntry.ValueCount; i < valueCount; i++) {
-				trigger = valueEntry.WeakValues[i] as BaseTrigger;
-				if (trigger != null) {
+				executor = valueEntry.WeakValues[i] as BaseExecutor;
+				if (executor != null) {
 					break;
 				}
 			}
-			return trigger;
+			return executor;
 		}
 		
 		protected static int DrawEnumButtons(string text, int value, string[] displayedOptions, int[] optionValues, bool isMask = false, params GUILayoutOption[] options) {
@@ -495,7 +495,7 @@ namespace Control {
 		
 		// ReSharper disable once StaticMemberInGenericType
 		protected static readonly Dictionary<ProcessStepTypeBase, string> s_TypeNameDict = new Dictionary<ProcessStepTypeBase, string> {
-			{ProcessStepTypeBase.TRIGGER, "触发"},
+			{ProcessStepTypeBase.EXECUTOR, "执行"},
 			{ProcessStepTypeBase.STATE_CONTROLLER, "状态控制"},
 			{ProcessStepTypeBase.PROGRESS_CONTROLLER, "进度控制"},
 			

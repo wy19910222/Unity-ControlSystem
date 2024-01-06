@@ -13,32 +13,32 @@ using UnityEditorInternal;
 
 namespace Control {
 	public partial class ProcessStepDrawerBase<TStep> {
-		private ReorderableList m_TriggerList;
-		private void DrawTrigger() {
-			if (m_TriggerList == null) {
-				m_TriggerList = new ReorderableList(Target.objArguments, typeof(UnityEngine.Object), true, true, false, false) {
+		private ReorderableList m_ExecutorList;
+		private void DrawExecutor() {
+			if (m_ExecutorList == null) {
+				m_ExecutorList = new ReorderableList(Target.objArguments, typeof(UnityEngine.Object), true, true, false, false) {
 					drawHeaderCallback = rect => {
 						Rect leftRect = new Rect(rect.x, rect.y, rect.width, rect.height);
-						EditorGUI.LabelField(leftRect, $"触发器列表({Target.objArguments.Count})");
+						EditorGUI.LabelField(leftRect, $"执行器列表({Target.objArguments.Count})");
 						Rect middleRect = new Rect(rect.x + rect.width - 124 - 1, rect.y - 1, 100, rect.height + 2);
 						if (GUI.Button(middleRect, "添加选中对象")) {
-							List<BaseTrigger> list = new List<BaseTrigger>();
+							List<BaseExecutor> list = new List<BaseExecutor>();
 							foreach (var obj in Selection.objects) {
 								switch (obj) {
 									case GameObject go: {
-										BaseTrigger trigger = go.GetComponent<BaseTrigger>();
-										if (trigger) {
-											list.Add(trigger);
+										BaseExecutor executor = go.GetComponent<BaseExecutor>();
+										if (executor) {
+											list.Add(executor);
 										}
 										break;
 									}
 									case Component comp: {
-										if (comp is BaseTrigger trigger) {
-											list.Add(trigger);
+										if (comp is BaseExecutor executor) {
+											list.Add(executor);
 										} else {
-											trigger = comp.GetComponent<BaseTrigger>();
-											if (trigger) {
-												list.Add(trigger);
+											executor = comp.GetComponent<BaseExecutor>();
+											if (executor) {
+												list.Add(executor);
 											}
 										}
 										break;
@@ -55,7 +55,7 @@ namespace Control {
 					},
 					drawElementCallback = (rect, index, isActive, isFocused) => {
 						Rect leftRect = new Rect(rect.x, rect.y + 1, rect.width - 24, rect.height - 2);
-						Target.objArguments[index] = DrawCompField<BaseTrigger>(leftRect, "", Target.objArguments[index]);
+						Target.objArguments[index] = DrawCompField<BaseExecutor>(leftRect, "", Target.objArguments[index]);
 						Rect rightRect = new Rect(leftRect.x + leftRect.width + 2, rect.y + 1, 28, rect.height - 2);
 						if (GUI.Button(rightRect, "×")) {
 							EditorApplication.delayCall += () => Target.objArguments.RemoveAt(index);
@@ -64,24 +64,24 @@ namespace Control {
 					elementHeight = 20, footerHeight = 0
 				};
 			}
-			m_TriggerList.list = Target.objArguments;
+			m_ExecutorList.list = Target.objArguments;
 			Property.RecordForUndo("ObjArguments");
-			m_TriggerList.DoLayoutList();
+			m_ExecutorList.DoLayoutList();
 			int totalCount = Target.objArguments.Count;
 			if (totalCount > 1) {
-				int newTriggerCount = Mathf.Max(EditorGUILayout.IntField("触发个数", Target.iArguments[0]), 1);
-				if (newTriggerCount != Target.iArguments[0]) {
+				int newExecutorCount = Mathf.Max(EditorGUILayout.IntField("执行个数", Target.iArguments[0]), 1);
+				if (newExecutorCount != Target.iArguments[0]) {
 					Property.RecordForUndo("IArguments");
-					Target.iArguments[0] = newTriggerCount;
+					Target.iArguments[0] = newExecutorCount;
 				}
 				
-				int triggerType = DrawEnumButtons("其他参数", Target.iArguments[1], new [] { "依次触发", "随机触发" }, new [] { 0, 1 });
-				if (triggerType != Target.iArguments[1]) {
+				int executeType = DrawEnumButtons("其他参数", Target.iArguments[1], new [] { "依次执行", "随机执行" }, new [] { 0, 1 });
+				if (executeType != Target.iArguments[1]) {
 					Property.RecordForUndo("IArguments");
-					Target.iArguments[1] = triggerType;
+					Target.iArguments[1] = executeType;
 					Target.iArguments[2] = 0;
 				}
-				switch (triggerType) {
+				switch (executeType) {
 					case 0: {
 						int shuffleType = DrawEnumButtons("洗牌", Target.iArguments[2], new [] { "不洗牌", "初始时洗一次", "循环时洗牌" }, new [] { 0, 1, 2 });
 						if (shuffleType != Target.iArguments[2]) {
@@ -91,7 +91,7 @@ namespace Control {
 						break;
 					}
 					case 1: {
-						if (newTriggerCount + newTriggerCount <= totalCount) {
+						if (newExecutorCount + newExecutorCount <= totalCount) {
 							int randomType = DrawEnumButtons("限制", Target.iArguments[2], new [] { "无限制", "不重复" }, new [] { 0, 1 });
 							if (randomType != Target.iArguments[2]) {
 								Property.RecordForUndo("IArguments");

@@ -17,12 +17,12 @@ namespace Control {
 		public List<StateController> stateControllers = new List<StateController>();
 		[ComponentSelect, ShowIf("@ProgressControllerEnabled")]
 		public List<ProgressController> progressControllers = new List<ProgressController>();
-		[ComponentSelect, ShowIf("@TriggerEnabled")]
-		public List<BaseTrigger> triggers = new List<BaseTrigger>();
+		[ComponentSelect, ShowIf("@ExecutorEnabled")]
+		public List<BaseExecutor> executors = new List<BaseExecutor>();
 		
 		private Action<int> m_OnStateChange;
 		private Action<float> m_OnProgressChange;
-		private Action m_OnTrigger;
+		private Action m_OnExecute;
 
 		protected virtual void SetState(int index) {
 			foreach (var stateController in stateControllers) {
@@ -38,11 +38,11 @@ namespace Control {
 			m_OnProgressChange?.Invoke(progress);
 		}
 
-		protected virtual void Trigger() {
-			foreach (var trigger in triggers) {
-				trigger.Trigger();
+		protected virtual void Execute() {
+			foreach (var executor in executors) {
+				executor.Execute();
 			}
-			m_OnTrigger?.Invoke();
+			m_OnExecute?.Invoke();
 		}
 
 		protected virtual bool StateControllerEnabled => true;
@@ -61,12 +61,12 @@ namespace Control {
 			m_OnProgressChange -= action;
 		}
 		
-		protected virtual bool TriggerEnabled => true;
-		public void OnTrigger(Action action) {
-			m_OnTrigger += action;
+		protected virtual bool ExecutorEnabled => true;
+		public void OnExecute(Action action) {
+			m_OnExecute += action;
 		}
-		public void OffTrigger(Action action) {
-			m_OnTrigger -= action;
+		public void OffExecute(Action action) {
+			m_OnExecute -= action;
 		}
 	}
 }

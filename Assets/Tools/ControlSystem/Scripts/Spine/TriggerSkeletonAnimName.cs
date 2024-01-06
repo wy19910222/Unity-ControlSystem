@@ -11,7 +11,7 @@ using Spine.Unity;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerSkeletonAnimName : BaseTrigger {
+	public class ExecutorSkeletonAnimName : BaseExecutor {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;
@@ -21,7 +21,7 @@ namespace Control {
 		[SkeletonAnimationNameSelect("skeletonAnimation", "skeletonGraphic")]
 		public string animationName;
 		
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			SkeletonAnimation sa = GetComponent<SkeletonAnimation>();
 			if (sa) {
 				sa.AnimationName = animationName;

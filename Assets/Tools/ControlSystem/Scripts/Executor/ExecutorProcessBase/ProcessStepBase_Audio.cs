@@ -17,7 +17,7 @@ namespace Control {
 				AudioManager.Instance.Play(clip, volumeScale);
 			}
 		}
-		private void DoStepAudioSourceCtrl(MonoBehaviour trigger) {
+		private void DoStepAudioSourceCtrl(MonoBehaviour executor) {
 			if (obj is AudioSource source) {
 				IEnumerator IEFadeVolume(AudioSource _source, float duration, float endVolume, System.Action callback = null) {
 					float beginVolume = _source.volume;
@@ -40,7 +40,7 @@ namespace Control {
 							float volume = source.volume;
 							source.volume = 0;
 							source.Play();
-							trigger.StartCoroutine(IEFadeVolume(source, fadeDuration, volume));
+							executor.StartCoroutine(IEFadeVolume(source, fadeDuration, volume));
 						} else {
 							source.Play();
 						}
@@ -48,7 +48,7 @@ namespace Control {
 					case 1:
 						if (source.isPlaying && fadeDuration > 0) {
 							float volume = source.volume;
-							trigger.StartCoroutine(IEFadeVolume(source, fadeDuration, 0, () => {
+							executor.StartCoroutine(IEFadeVolume(source, fadeDuration, 0, () => {
 								source.Stop();
 								source.volume = volume;
 							}));
@@ -59,7 +59,7 @@ namespace Control {
 					case 2:
 						if (source.isPlaying && fadeDuration > 0) {
 							float volume = source.volume;
-							trigger.StartCoroutine(IEFadeVolume(source, fadeDuration, 0, () => {
+							executor.StartCoroutine(IEFadeVolume(source, fadeDuration, 0, () => {
 								source.Pause();
 								source.volume = volume;
 							}));
@@ -72,7 +72,7 @@ namespace Control {
 							float volume = source.volume;
 							source.volume = 0;
 							source.UnPause();
-							trigger.StartCoroutine(IEFadeVolume(source, fadeDuration, volume));
+							executor.StartCoroutine(IEFadeVolume(source, fadeDuration, volume));
 						} else {
 							source.UnPause();
 						}
@@ -81,7 +81,7 @@ namespace Control {
 						if (source.isPlaying) {
 							if (fadeDuration > 0) {
 								float volume = source.volume;
-								trigger.StartCoroutine(IEFadeVolume(source, fadeDuration, 0, () => {
+								executor.StartCoroutine(IEFadeVolume(source, fadeDuration, 0, () => {
 									source.Pause();
 									source.volume = volume;
 								}));
@@ -93,7 +93,7 @@ namespace Control {
 								float volume = source.volume;
 								source.volume = 0;
 								source.UnPause();
-								trigger.StartCoroutine(IEFadeVolume(source, fadeDuration, volume));
+								executor.StartCoroutine(IEFadeVolume(source, fadeDuration, volume));
 							} else {
 								source.UnPause();
 							}

@@ -33,7 +33,7 @@ namespace Control {
 			if (enabled && type == Physics2DEventType.ON_TRIGGER_ENTER_2D && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider2D>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -43,7 +43,7 @@ namespace Control {
 			if (enabled && type == Physics2DEventType.ON_TRIGGER_STAY_2D && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider2D>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -53,7 +53,7 @@ namespace Control {
 			if (enabled && type == Physics2DEventType.ON_TRIGGER_EXIT_2D && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider2D>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -63,7 +63,7 @@ namespace Control {
 			if (enabled && type == Physics2DEventType.ON_COLLISION_ENTER_2D) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider2D>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -73,7 +73,7 @@ namespace Control {
 			if (enabled && type == Physics2DEventType.ON_COLLISION_STAY_2D) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider2D>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}
@@ -83,7 +83,7 @@ namespace Control {
 			if (enabled && type == Physics2DEventType.ON_COLLISION_EXIT_2D) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider2D>(), c => c.enabled)) {
-						Trigger();
+						Execute();
 					}
 				}
 			}

@@ -15,12 +15,12 @@ using UObject = UnityEngine.Object;
 
 namespace Control {
 	public enum ProcessStepTypeBase {
-		// triggerType说明：0-依次, 1-随机
+		// executeType说明：0-依次, 1-随机
 		// shuffleType说明：0-不洗牌, 1-仅洗一次, 2-循环时洗牌
 		// randomType说明：0-无限制, 1-不重复
-		// BaseTrigger[] triggers, int[0] triggerCount, int[1] triggerType, int[2] shuffleType
-		// BaseTrigger[] triggers, int[0] triggerCount, int[1] triggerType, int[2] randomType
-		TRIGGER = 0,
+		// BaseExecutor[] executors, int[0] executorCount, int[1] executeType, int[2] shuffleType
+		// BaseExecutor[] executors, int[0] executorCount, int[1] executeType, int[2] randomType
+		EXECUTOR = 0,
 		// StateController cState, bool[0] isRelative, int[0] offset, bool[1] loop
 		// StateController cState, bool[0] isRelative, bool[1] recordIndex, bool[2] random, int[0] uid
 		// StateController cState, bool[0] isRelative, bool[1] recordIndex, bool[2] random, int[] uids, bool[3] noRepeat
@@ -154,7 +154,7 @@ namespace Control {
 		public AnimationCurve tweenEaseCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
 		
 #if UNITY_EDITOR
-		protected bool IsTriggered { get; set; }
+		protected bool IsExecuted { get; set; }
 #endif
 
 		public ProcessStepTypeBase Type {
@@ -168,20 +168,20 @@ namespace Control {
 		}
 
 		public ProcessStepBase() {
-			// Reset by ProcessStepTypeBase.TRIGGER
-			objArguments.Add(null);	// triggers[0]
-			iArguments.Add(1);	// triggerCount
-			iArguments.Add(0);	// triggerType
+			// Reset by ProcessStepTypeBase.EXECUTOR
+			objArguments.Add(null);	// executors[0]
+			iArguments.Add(1);	// executorCount
+			iArguments.Add(0);	// executeType
 			iArguments.Add(0);	// shuffleType/randomType
 		}
 		
-		public virtual void DoStep(BaseTrigger trigger) {
+		public virtual void DoStep(BaseExecutor executor) {
 #if UNITY_EDITOR
-			IsTriggered = true;
+			IsExecuted = true;
 #endif
 			switch (Type) {
-				case ProcessStepTypeBase.TRIGGER:
-					DoStepTrigger();
+				case ProcessStepTypeBase.EXECUTOR:
+					DoStepExecutor();
 					break;
 				case ProcessStepTypeBase.STATE_CONTROLLER:
 					DoStepStateController();
@@ -194,7 +194,7 @@ namespace Control {
 					break;
 				
 				case ProcessStepTypeBase.INSTANTIATE:
-					DoStepInstantiate(trigger);
+					DoStepInstantiate(executor);
 					break;
 				case ProcessStepTypeBase.DESTROY:
 					DoStepDestroy();
@@ -222,7 +222,7 @@ namespace Control {
 					DoStepAudioOneShot();
 					break;
 				case ProcessStepTypeBase.AUDIO_SOURCE_CTRL:
-					DoStepAudioSourceCtrl(trigger);
+					DoStepAudioSourceCtrl(executor);
 					break;
 				case ProcessStepTypeBase.AUDIOS_PLAY:
 					DoStepAudiosPlay();
@@ -310,10 +310,10 @@ namespace Control {
 #endif
 			
 			switch (type) {
-				case ProcessStepTypeBase.TRIGGER:
-					objArguments.Add(null);	// triggers[0]
-					iArguments.Add(1);	// triggerCount
-					iArguments.Add(0);	// triggerType
+				case ProcessStepTypeBase.EXECUTOR:
+					objArguments.Add(null);	// executors[0]
+					iArguments.Add(1);	// executorCount
+					iArguments.Add(0);	// executeType
 					iArguments.Add(0);	// shuffleType/randomType
 					break;
 				case ProcessStepTypeBase.STATE_CONTROLLER:

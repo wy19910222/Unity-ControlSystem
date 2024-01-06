@@ -11,7 +11,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerAspectRatio : BaseTrigger {
+	public class ExecutorAspectRatio : BaseExecutor {
 		public AspectRatioFitter fitter;
 		public bool targetAsValue;
 		[HideIf("@this.targetAsValue")]
@@ -33,7 +33,7 @@ namespace Control {
 		
 		private Tweener m_Tweener;
 
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			if (fitter) {
 				float aspectRatio = value;
 				if (targetAsValue) {

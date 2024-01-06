@@ -48,8 +48,8 @@ namespace Control {
 	}
 
 	[Serializable]
-	public class StateRelateTrigger : StateRelate {
-		public BaseTrigger trigger;
+	public class StateRelateExecutor : StateRelate {
+		public BaseExecutor executor;
 	}
 
 	public class StateController : MonoBehaviour {
@@ -70,7 +70,7 @@ namespace Control {
 		public List<State> states = new List<State>();
 		public List<StateRelateState> relations = new List<StateRelateState>();
 		public List<StateRelateProgress> progressRelations = new List<StateRelateProgress>();
-		public List<StateRelateTrigger> triggerRelations = new List<StateRelateTrigger>();
+		public List<StateRelateExecutor> executorRelations = new List<StateRelateExecutor>();
 
 		public bool lazyInit;
 		public bool invalidateTween;
@@ -92,7 +92,7 @@ namespace Control {
 			states.Clear();
 			relations.Clear();
 			progressRelations.Clear();
-			triggerRelations.Clear();
+			executorRelations.Clear();
 			m_PrevIndex = 0;
 			m_Index = 0;
 			AddState();
@@ -232,9 +232,9 @@ namespace Control {
 					DelayCall(relation.delay, () => relation.controller.Progress = relation.targetProgress, relation);
 				}
 			}
-			foreach (var relation in triggerRelations) {
-				if (relation.trigger && IsIndexSelected(relation.toUIDs, m_Index) && IsIndexSelected(relation.fromUIDs, m_PrevIndex)) {
-					DelayCall(relation.delay, () => relation.trigger.Trigger(), relation);
+			foreach (var relation in executorRelations) {
+				if (relation.executor && IsIndexSelected(relation.toUIDs, m_Index) && IsIndexSelected(relation.fromUIDs, m_PrevIndex)) {
+					DelayCall(relation.delay, () => relation.executor.Execute(), relation);
 				}
 			}
 		}
@@ -290,7 +290,7 @@ namespace Control {
 					relation.toUIDs[i] = idMap[relation.toUIDs[i]];
 				}
 			}
-			foreach (var relation in triggerRelations) {
+			foreach (var relation in executorRelations) {
 				for (int i = 0, length = relation.fromUIDs.Count; i < length; ++i) {
 					relation.fromUIDs[i] = idMap[relation.fromUIDs[i]];
 				}

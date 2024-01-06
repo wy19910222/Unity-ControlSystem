@@ -14,7 +14,7 @@ using UnityEngine;
 using AnimationState = Spine.AnimationState;
 
 namespace Control {
-	public class TriggerSkeletonRestart : BaseTrigger {
+	public class ExecutorSkeletonRestart : BaseExecutor {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;
@@ -26,7 +26,7 @@ namespace Control {
 		[Tooltip("若勾选，即使未播放完也会从头开始播")]
 		public bool whenIsNotComplete;
 		
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			if (skeletonAnimation) {
 				AnimationState state = skeletonAnimation.AnimationState;
 				if (state != null) {

@@ -25,7 +25,7 @@ namespace Control {
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("参数", CustomEditorGUI.LabelWidthOption);
-			InjectionDrawer.DrawDict(Target.luaInjectionList, GetTargetTrigger(), true);
+			InjectionDrawer.DrawDict(Target.luaInjectionList, GetTargetExecutor(), true);
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
@@ -81,7 +81,7 @@ namespace Control {
 			}
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("参数", CustomEditorGUI.LabelWidthOption);
-			InjectionDrawer.DrawSingle(Target.luaInjectionList[0], GetTargetTrigger(), true);
+			InjectionDrawer.DrawSingle(Target.luaInjectionList[0], GetTargetExecutor(), true);
 			EditorGUILayout.EndHorizontal();
 		}
 
@@ -133,7 +133,7 @@ namespace Control {
 			}
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField("参数", CustomEditorGUI.LabelWidthOption);
-			InjectionDrawer.DrawList(Target.luaInjectionList, GetTargetTrigger(), true);
+			InjectionDrawer.DrawList(Target.luaInjectionList, GetTargetExecutor(), true);
 			EditorGUILayout.EndHorizontal();
 		}
 	}

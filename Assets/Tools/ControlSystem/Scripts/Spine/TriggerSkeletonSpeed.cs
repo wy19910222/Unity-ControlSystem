@@ -11,7 +11,7 @@ using Spine.Unity;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class TriggerSkeletonSpeed : BaseTrigger {
+	public class ExecutorSkeletonSpeed : BaseExecutor {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;
@@ -20,7 +20,7 @@ namespace Control {
 		public SkeletonGraphic skeletonGraphic;
 		public float timeScale = 1;
 		
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			SkeletonAnimation sa = skeletonAnimation ? skeletonAnimation : GetComponent<SkeletonAnimation>();
 			if (sa) {
 				sa.timeScale = timeScale;

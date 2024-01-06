@@ -17,17 +17,17 @@ namespace Control {
 	
 	public class UpdateEventListener : BaseEventListener {
 		public UpdateEventType type = UpdateEventType.FRAMES_INTERVAL;
-		public bool triggerOnce;
+		public bool executeOnce;
 		[ShowIf("@type == UpdateEventType.FRAMES_INTERVAL")]
 		[LabelText("Delay")]
 		public int framesDelay;
 		[ShowIf("@type == UpdateEventType.SECONDS_INTERVAL")]
 		[LabelText("Delay")]
 		public float secondsDelay;
-		[ShowIf("@type == UpdateEventType.FRAMES_INTERVAL && !triggerOnce")]
+		[ShowIf("@type == UpdateEventType.FRAMES_INTERVAL && !executeOnce")]
 		[LabelText("Interval")]
 		public int framesInterval = 1;
-		[ShowIf("@type == UpdateEventType.SECONDS_INTERVAL && !triggerOnce")]
+		[ShowIf("@type == UpdateEventType.SECONDS_INTERVAL && !executeOnce")]
 		[LabelText("Interval")]
 		public float secondsInterval = 1;
 		
@@ -36,12 +36,12 @@ namespace Control {
 
 		private int m_Frames;
 		private float m_Seconds;
-		private bool m_IsTriggered;
+		private bool m_IsExecuted;
 		
 		private void OnEnable() {
 			m_Frames = 0;
 			m_Seconds = 0;
-			m_IsTriggered = false;
+			m_IsExecuted = false;
 			DoUpdate();
 		}
 
@@ -54,19 +54,19 @@ namespace Control {
 		private void DoUpdate() {
 			switch (type) {
 				case UpdateEventType.FRAMES_INTERVAL: {
-					if (!m_IsTriggered && m_Frames >= framesDelay) {
+					if (!m_IsExecuted && m_Frames >= framesDelay) {
 						m_Frames -= Mathf.Max(framesDelay, 1);
-						Trigger();
-						m_IsTriggered = true;
-						if (triggerOnce) {
+						Execute();
+						m_IsExecuted = true;
+						if (executeOnce) {
 							enabled = false;
 						}
 					}
-					if (m_IsTriggered) {
+					if (m_IsExecuted) {
 						while (m_Frames >= framesInterval) {
 							m_Frames -= Mathf.Max(framesInterval, 1);
-							Trigger();
-							if (triggerOnce) {
+							Execute();
+							if (executeOnce) {
 								enabled = false;
 								break;
 							}
@@ -75,19 +75,19 @@ namespace Control {
 					break;
 				}
 				case UpdateEventType.SECONDS_INTERVAL: {
-					if (!m_IsTriggered && m_Seconds >= secondsDelay) {
+					if (!m_IsExecuted && m_Seconds >= secondsDelay) {
 						m_Seconds -= Mathf.Max(secondsDelay, Time.deltaTime);
-						Trigger();
-						m_IsTriggered = true;
-						if (triggerOnce) {
+						Execute();
+						m_IsExecuted = true;
+						if (executeOnce) {
 							enabled = false;
 						}
 					}
-					if (m_IsTriggered) {
+					if (m_IsExecuted) {
 						while (m_Seconds >= secondsInterval) {
 							m_Seconds -= Mathf.Max(secondsInterval, Time.deltaTime);
-							Trigger();
-							if (triggerOnce) {
+							Execute();
+							if (executeOnce) {
 								enabled = false;
 								break;
 							}

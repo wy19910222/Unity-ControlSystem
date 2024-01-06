@@ -41,7 +41,7 @@ namespace Control {
 
 		private StateRelateState m_StateRelationToPaste;
 		private StateRelateProgress m_ProgressRelationToPaste;
-		private StateRelateTrigger m_TriggerRelationToPaste;
+		private StateRelateExecutor m_ExecutorRelationToPaste;
 
 		private PropertyModification[] m_Modifications = Array.Empty<PropertyModification>();
 
@@ -81,7 +81,7 @@ namespace Control {
 					EditorGUILayout.Space(2F, false);
 					DrawProgressRelations(m_Target.progressRelations);
 					EditorGUILayout.Space(2F, false);
-					DrawTriggerRelations(m_Target.triggerRelations);
+					DrawExecutorRelations(m_Target.executorRelations);
 					EditorGUILayout.Space(5F, false);
 					DrawTargets();
 					EditorGUILayout.Space(5F, false);
@@ -352,10 +352,10 @@ namespace Control {
 				sb.Append(progressRelationCount);
 				sb.Append("\t");
 			}
-			int triggerRelationCount = m_Target.triggerRelations.Count;
-			if (triggerRelationCount > 0) {
-				sb.Append("关联触发器:");
-				sb.Append(triggerRelationCount);
+			int executorRelationCount = m_Target.executorRelations.Count;
+			if (executorRelationCount > 0) {
+				sb.Append("关联执行器:");
+				sb.Append(executorRelationCount);
 				sb.Append("\t");
 			}
 			if (sb.Length > 0) {
@@ -562,11 +562,11 @@ namespace Control {
 			}
 		}
 
-		private void DrawTriggerRelations(IList<StateRelateTrigger> relations) {
-			bool fold = EditorPrefs.GetBool("DrawTriggerRelations", false);
-			bool newFold = GUILayout.Toggle(fold, fold ? "\u25BA 关联触发器:" : "\u25BC 关联触发器:", "BoldLabel");
+		private void DrawExecutorRelations(IList<StateRelateExecutor> relations) {
+			bool fold = EditorPrefs.GetBool("DrawExecutorRelations", false);
+			bool newFold = GUILayout.Toggle(fold, fold ? "\u25BA 关联执行器:" : "\u25BC 关联执行器:", "BoldLabel");
 			if (newFold != fold) {
-				EditorPrefs.SetBool("DrawTriggerRelations", newFold);
+				EditorPrefs.SetBool("DrawExecutorRelations", newFold);
 			}
 			if (!newFold) {
 				if (relations.Count > 0) {
@@ -579,21 +579,21 @@ namespace Control {
 				EditorGUILayout.BeginHorizontal();
 				EditorGUILayout.Space(10F, false);
 				if (GUILayout.Button("+", GUILayout.Width(30F))) {
-					Undo.RecordObject(m_Target, "TriggerRelation.Add");
-					relations.Add(new StateRelateTrigger());
+					Undo.RecordObject(m_Target, "ExecutorRelation.Add");
+					relations.Add(new StateRelateExecutor());
 				}
 				EditorGUILayout.Space(5F, false);
-				CustomEditorGUI.BeginDisabled(m_TriggerRelationToPaste == null && relations.Count <= 0);
+				CustomEditorGUI.BeginDisabled(m_ExecutorRelationToPaste == null && relations.Count <= 0);
 				if (GUILayout.Button("粘贴", GUILayout.Width(40F))) {
-					StateRelateTrigger basedRelation = m_TriggerRelationToPaste ?? relations[relations.Count - 1];
-					StateRelateTrigger relation = new StateRelateTrigger {
+					StateRelateExecutor basedRelation = m_ExecutorRelationToPaste ?? relations[relations.Count - 1];
+					StateRelateExecutor relation = new StateRelateExecutor {
 						fromUIDs = new List<int>(basedRelation.fromUIDs),
 						toUIDs = new List<int>(basedRelation.toUIDs),
 						delay = basedRelation.delay,
 						single = basedRelation.single,
-						trigger = basedRelation.trigger
+						executor = basedRelation.executor
 					};
-					Undo.RecordObject(m_Target, "TriggerRelation.Add");
+					Undo.RecordObject(m_Target, "ExecutorRelation.Add");
 					relations.Add(relation);
 				}
 				CustomEditorGUI.EndDisabled();
@@ -691,13 +691,13 @@ namespace Control {
 						}
 						break;
 					}
-					case StateRelateTrigger triggerRelation: {
-						// 触发
-						EditorGUILayout.LabelField("触发", GUILayout.Width(25F));
-						triggerRelation.trigger = DrawComponentSelector(
-								triggerRelation.trigger,
-								trigger => trigger.GetType().Name + " - " + (string.IsNullOrEmpty(trigger.title) ? "匿名" : trigger.title),
-								() => Undo.RecordObject(m_Target, "TriggerRelation.Trigger")
+					case StateRelateExecutor executorRelation: {
+						// 执行
+						EditorGUILayout.LabelField("执行", GUILayout.Width(25F));
+						executorRelation.executor = DrawComponentSelector(
+								executorRelation.executor,
+								executor => executor.GetType().Name + " - " + (string.IsNullOrEmpty(executor.title) ? "匿名" : executor.title),
+								() => Undo.RecordObject(m_Target, "ExecutorRelation.Execute")
 						);
 						break;
 					}
@@ -713,7 +713,7 @@ namespace Control {
 				}
 				CustomEditorGUI.EndLabelWidth();
 
-				GUIContent content = new GUIContent("允许掐掉", "选中后，如果两次触发间隔小于延迟，则上一次延迟会被掐掉");
+				GUIContent content = new GUIContent("允许掐掉", "选中后，如果两次执行间隔小于延迟，则上一次延迟会被掐掉");
 				bool newSingle = CustomEditorGUI.Toggle(relation.single, content, CustomEditorGUI.COLOR_TOGGLE_CHECKED, GUILayout.Width(58F));
 				if (newSingle != relation.single) {
 					Undo.RecordObject(m_Target, "Relation.Single");
@@ -737,10 +737,10 @@ namespace Control {
 						}
 						break;
 					}
-					case StateRelateTrigger triggerRelation: {
-						bool isSelect = m_TriggerRelationToPaste == null ? i == length - 1 : m_TriggerRelationToPaste == triggerRelation;
+					case StateRelateExecutor executorRelation: {
+						bool isSelect = m_ExecutorRelationToPaste == null ? i == length - 1 : m_ExecutorRelationToPaste == executorRelation;
 						if (CustomEditorGUI.Toggle(isSelect, "复制", CustomEditorGUI.COLOR_TOGGLE_CHECKED_EDITOR, GUILayout.Width(34F)) && !isSelect) {
-							m_TriggerRelationToPaste = triggerRelation;
+							m_ExecutorRelationToPaste = executorRelation;
 						}
 						break;
 					}
@@ -769,8 +769,8 @@ namespace Control {
 						m_StateRelationToPaste = null;
 					} else if (m_ProgressRelationToPaste == relation) {
 						m_ProgressRelationToPaste = null;
-					} else if (m_TriggerRelationToPaste == relation) {
-						m_TriggerRelationToPaste = null;
+					} else if (m_ExecutorRelationToPaste == relation) {
+						m_ExecutorRelationToPaste = null;
 					}
 				}
 				EditorGUILayout.EndHorizontal();

@@ -12,6 +12,7 @@ namespace Control {
 	public class StateCtrlAnimatorTrigger : BaseStateCtrl<bool> {
 		[SelfAnimatorParamSelect(AnimatorControllerParameterType.Trigger)]
 		public string paramName;
+		public bool falseIsReset;
 		public bool trigger;
 		
 		protected override bool TargetValue {
@@ -20,7 +21,7 @@ namespace Control {
 				trigger = value;
 				if (value) {
 					GetComponent<Animator>().SetTrigger(paramName);
-				} else {
+				} else if (falseIsReset) {
 					GetComponent<Animator>().ResetTrigger(paramName);
 				}
 			}

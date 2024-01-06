@@ -19,13 +19,13 @@ namespace Control {
 
 		private void OnBecameVisible() {
 			if (enabled && type == VisibleEventType.ON_BECAME_INVISIBLE) {
-				Trigger();
+				Execute();
 			}
 		}
 
 		private void OnBecameInvisible() {
 			if (enabled && type == VisibleEventType.ON_BECAME_VISIBLE) {
-				Trigger();
+				Execute();
 			}
 		}
 	}

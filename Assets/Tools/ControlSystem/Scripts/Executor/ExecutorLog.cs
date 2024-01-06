@@ -6,36 +6,35 @@
  */
 
 using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Control {
-	public enum TriggerLogLevel {
+	public enum ExecutorLogLevel {
 		NONE,
 		ERROR,
 		WARNING,
 		LOG,
 	}
 	
-	public class TriggerLog : BaseTrigger {
-		public TriggerLogLevel level = TriggerLogLevel.LOG;
+	public class ExecutorLog : BaseExecutor {
+		public ExecutorLogLevel level = ExecutorLogLevel.LOG;
 		public string message;
 		public Object context;
 		public bool showTime;
 		
-		protected override void DoTrigger() {
+		protected override void DoExecute() {
 			string msg = showTime ? $"[{DateTime.Now:HH:mm:ss.fff} {Time.frameCount}]{message}" : message;
 			switch (level) {
-				case TriggerLogLevel.NONE:
+				case ExecutorLogLevel.NONE:
 					break;
-				case TriggerLogLevel.ERROR:
+				case ExecutorLogLevel.ERROR:
 					Debug.LogError(msg, context);
 					break;
-				case TriggerLogLevel.WARNING:
+				case ExecutorLogLevel.WARNING:
 					Debug.LogWarning(msg, context);
 					break;
-				case TriggerLogLevel.LOG:
+				case ExecutorLogLevel.LOG:
 					Debug.Log(msg, context);
 					break;
 				default:

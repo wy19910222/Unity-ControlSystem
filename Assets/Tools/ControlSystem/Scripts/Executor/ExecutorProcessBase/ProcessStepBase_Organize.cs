@@ -9,10 +9,10 @@ using UnityEngine;
 
 namespace Control {
 	public partial class ProcessStepBase {
-		private void DoStepInstantiate(Component trigger) {
+		private void DoStepInstantiate(Component executor) {
 			if (obj is Transform prefab) {
 				bool specifyParent = GetBArgument(0);
-				Transform parent = specifyParent ? GetObjArgument<Transform>(0) : trigger.transform;
+				Transform parent = specifyParent ? GetObjArgument<Transform>(0) : executor.transform;
 				bool resetPos = GetBArgument(1);
 				Transform posBased = GetObjArgument<Transform>(1);
 				bool resetRot = GetBArgument(2);

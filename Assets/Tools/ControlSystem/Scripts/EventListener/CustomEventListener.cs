@@ -22,16 +22,16 @@ namespace Control {
 			OffAll(this);
 		}
 
-		protected override void Trigger() {
+		protected override void Execute() {
 			if (enabled) {
-				base.Trigger();
+				base.Execute();
 			}
 		}
 
 		[UsedImplicitly]
-		private void CustomTrigger(string evtName) {
+		private void CustomEvent(string evtName) {
 			if (evtName == eventName) {
-				Trigger();
+				Execute();
 			}
 		}
 
@@ -44,10 +44,10 @@ namespace Control {
 			}
 
 			if (s_EventListenersDict.TryGetValue(eventName, out List<CustomEventListener> list)) {
-				List<CustomEventListener> listWillTrigger = new List<CustomEventListener>(list);
-				foreach (var listener in listWillTrigger) {
+				List<CustomEventListener> listWillExecute = new List<CustomEventListener>(list);
+				foreach (var listener in listWillExecute) {
 					try {
-						listener.Trigger();
+						listener.Execute();
 					} catch (Exception e) {
 						Debug.LogError(e);
 					}

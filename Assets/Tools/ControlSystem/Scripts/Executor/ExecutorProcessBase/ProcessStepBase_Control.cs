@@ -11,29 +11,29 @@ using DG.Tweening;
 
 namespace Control {
 	public partial class ProcessStepBase {
-		private List<int> m_PrevTriggersIndexList;
-		private bool m_TriggersShuffled;
-		private void DoStepTrigger() {
+		private List<int> m_PrevExecutorsIndexList;
+		private bool m_ExecutorsShuffled;
+		private void DoStepExecutor() {
 			int totalCount = objArguments.Count;
 			switch (totalCount) {
 				case 0:
 					break;
 				case 1: {
-					if (objArguments[0] is BaseTrigger trigger) {
-						trigger.Trigger();
+					if (objArguments[0] is BaseExecutor executor) {
+						executor.Execute();
 					}
 					break;
 				}
 				default: {
-					List<BaseTrigger> triggerList = new List<BaseTrigger>();
-					if (m_PrevTriggersIndexList == null) {
-						m_PrevTriggersIndexList = new List<int>();
+					List<BaseExecutor> executorList = new List<BaseExecutor>();
+					if (m_PrevExecutorsIndexList == null) {
+						m_PrevExecutorsIndexList = new List<int>();
 					}
-					int triggerCount = GetIArgument(0);
-					int triggerType = GetIArgument(1);
-					switch (triggerType) {
+					int executorCount = GetIArgument(0);
+					int executeType = GetIArgument(1);
+					switch (executeType) {
 						case 0:
-							int nextIndex = m_PrevTriggersIndexList.Count > 0 ? m_PrevTriggersIndexList[m_PrevTriggersIndexList.Count - 1] + 1 : 0;
+							int nextIndex = m_PrevExecutorsIndexList.Count > 0 ? m_PrevExecutorsIndexList[m_PrevExecutorsIndexList.Count - 1] + 1 : 0;
 							int shuffleType = GetIArgument(2);
 							if (shuffleType > 0) {
 								void Shuffle() {
@@ -46,50 +46,50 @@ namespace Control {
 								}
 								switch (shuffleType) {
 									case 1:
-										if (!m_TriggersShuffled) {
-											m_TriggersShuffled = true;
+										if (!m_ExecutorsShuffled) {
+											m_ExecutorsShuffled = true;
 											Shuffle();
 										}
 										break;
 									case 2:
-										if (nextIndex >= totalCount || nextIndex < triggerCount) {
-											m_TriggersShuffled = true;
+										if (nextIndex >= totalCount || nextIndex < executorCount) {
+											m_ExecutorsShuffled = true;
 											Shuffle();
 										}
 										break;
 								}
 							}
-							m_PrevTriggersIndexList.Clear();
-							for (int i = 0, count = Mathf.Min(triggerCount, totalCount); i < count; ++i) {
+							m_PrevExecutorsIndexList.Clear();
+							for (int i = 0, count = Mathf.Min(executorCount, totalCount); i < count; ++i) {
 								int index = nextIndex + i;
 								if (index >= totalCount) {
 									index -= totalCount;
 								}
-								m_PrevTriggersIndexList.Add(index);
-								triggerList.Add(objArguments[index] as BaseTrigger);
+								m_PrevExecutorsIndexList.Add(index);
+								executorList.Add(objArguments[index] as BaseExecutor);
 							}
 							break;
 						case 1:
 							int randomType = GetIArgument(2);
 							List<int> indexList = new List<int>();
-							for (int i = 0, prevIndexCount = m_PrevTriggersIndexList.Count; i < totalCount; ++i) {
-								if (randomType == 0 || prevIndexCount + triggerCount > totalCount || !m_PrevTriggersIndexList.Contains(i)) {
+							for (int i = 0, prevIndexCount = m_PrevExecutorsIndexList.Count; i < totalCount; ++i) {
+								if (randomType == 0 || prevIndexCount + executorCount > totalCount || !m_PrevExecutorsIndexList.Contains(i)) {
 									indexList.Add(i);
 								}
 							}
-							m_PrevTriggersIndexList.Clear();
-							for (int i = 0, count = Mathf.Min(triggerCount, indexList.Count); i < count; ++i) {
+							m_PrevExecutorsIndexList.Clear();
+							for (int i = 0, count = Mathf.Min(executorCount, indexList.Count); i < count; ++i) {
 								int indexIndex = Random.Range(0, indexList.Count);
 								int index = indexList[indexIndex];
 								indexList.RemoveAt(indexIndex);
-								m_PrevTriggersIndexList.Add(index);
-								triggerList.Add(objArguments[index] as BaseTrigger);
+								m_PrevExecutorsIndexList.Add(index);
+								executorList.Add(objArguments[index] as BaseExecutor);
 							}
 							break;
 					}
-					foreach (var trigger in triggerList) {
-						if (trigger) {
-							trigger.Trigger();
+					foreach (var executor in executorList) {
+						if (executor) {
+							executor.Execute();
 						}
 					}
 					break;
@@ -229,7 +229,7 @@ namespace Control {
 			} else {
 				GameObject target = GetObjArgument<GameObject>(0);
 				if (target) {
-					target.SendMessage("CustomTrigger", eventName);
+					target.SendMessage("CustomEvent", eventName);
 				}
 			}
 		}

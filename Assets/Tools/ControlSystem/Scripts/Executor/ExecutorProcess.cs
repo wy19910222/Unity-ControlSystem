@@ -6,7 +6,7 @@
  */
 
 namespace Control {
-	public class TriggerProcess : TriggerProcessBase<ProcessStepBase> {
+	public class ExecutorProcess : ExecutorProcessBase<ProcessStepBase> {
 		
 	}
 }
