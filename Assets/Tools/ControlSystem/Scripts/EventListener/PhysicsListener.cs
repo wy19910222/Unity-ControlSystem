@@ -19,7 +19,7 @@ namespace Control {
 		ON_COLLISION_EXIT = 5
 	}
 	
-	public class PhysicsEventListener : BaseEventListener {
+	public class PhysicsListener : BaseListener {
 		public PhysicsEventType type = PhysicsEventType.ON_TRIGGER_ENTER;
 		public List<Collider> colliders = new List<Collider>();
 		[Tooltip("勾选后，双方任一勾选isTrigger都能响应Trigger相关回调")]

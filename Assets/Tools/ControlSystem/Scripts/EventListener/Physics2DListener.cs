@@ -19,7 +19,7 @@ namespace Control {
 		ON_COLLISION_EXIT_2D = 5
 	}
 	
-	public class Physics2DEventListener : BaseEventListener {
+	public class Physics2DListener : BaseListener {
 		public Physics2DEventType type = Physics2DEventType.ON_TRIGGER_ENTER_2D;
 		public List<Collider2D> colliders = new List<Collider2D>();
 		[Tooltip("勾选后，双方任一勾选isTrigger都能响应Trigger相关回调")]

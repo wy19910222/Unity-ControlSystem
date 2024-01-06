@@ -11,7 +11,7 @@ namespace Control {
 		ON_BECAME_VISIBLE = 1
 	}
 	
-	public class VisibleEventListener : BaseEventListener {
+	public class VisibleListener : BaseListener {
 		public VisibleEventType type = VisibleEventType.ON_BECAME_INVISIBLE;
 		
 		protected override bool StateControllerEnabled => false;

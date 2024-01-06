@@ -2,7 +2,7 @@
  * @Author: wangyun
  * @CreateTime: 2022-06-28 17:46:08 579
  * @LastEditor: wangyun
- * @EditTime: 2022-07-07 14:56:39 268
+ * @EditTime: 2022-07-07 14:56:29 118
  */
 
 using System;
@@ -10,24 +10,24 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public enum UpdateEventType {
+	public enum LateUpdateEventType {
 		FRAMES_INTERVAL = 0,
 		SECONDS_INTERVAL = 1
 	}
 	
-	public class UpdateEventListener : BaseEventListener {
-		public UpdateEventType type = UpdateEventType.FRAMES_INTERVAL;
+	public class LateUpdateListener : BaseListener {
+		public LateUpdateEventType type = LateUpdateEventType.FRAMES_INTERVAL;
 		public bool executeOnce;
-		[ShowIf("@type == UpdateEventType.FRAMES_INTERVAL")]
+		[ShowIf("@type == LateUpdateEventType.FRAMES_INTERVAL")]
 		[LabelText("Delay")]
-		public int framesDelay;
-		[ShowIf("@type == UpdateEventType.SECONDS_INTERVAL")]
+		public int framesDelay = 1;
+		[ShowIf("@type == LateUpdateEventType.SECONDS_INTERVAL")]
 		[LabelText("Delay")]
-		public float secondsDelay;
-		[ShowIf("@type == UpdateEventType.FRAMES_INTERVAL && !executeOnce")]
+		public float secondsDelay = 1;
+		[ShowIf("@type == LateUpdateEventType.FRAMES_INTERVAL && !executeOnce")]
 		[LabelText("Interval")]
 		public int framesInterval = 1;
-		[ShowIf("@type == UpdateEventType.SECONDS_INTERVAL && !executeOnce")]
+		[ShowIf("@type == LateUpdateEventType.SECONDS_INTERVAL && !executeOnce")]
 		[LabelText("Interval")]
 		public float secondsInterval = 1;
 		
@@ -42,10 +42,11 @@ namespace Control {
 			m_Frames = 0;
 			m_Seconds = 0;
 			m_IsExecuted = false;
-			DoUpdate();
+			// 需要同步执行请用UpdateEventListener
+			// DoUpdate();
 		}
-
-		private void Update() {
+		
+		private void LateUpdate() {
 			m_Frames++;
 			m_Seconds += Time.deltaTime;
 			DoUpdate();
@@ -53,7 +54,7 @@ namespace Control {
 
 		private void DoUpdate() {
 			switch (type) {
-				case UpdateEventType.FRAMES_INTERVAL: {
+				case LateUpdateEventType.FRAMES_INTERVAL: {
 					if (!m_IsExecuted && m_Frames >= framesDelay) {
 						m_Frames -= Mathf.Max(framesDelay, 1);
 						Execute();
@@ -74,7 +75,7 @@ namespace Control {
 					}
 					break;
 				}
-				case UpdateEventType.SECONDS_INTERVAL: {
+				case LateUpdateEventType.SECONDS_INTERVAL: {
 					if (!m_IsExecuted && m_Seconds >= secondsDelay) {
 						m_Seconds -= Mathf.Max(secondsDelay, Time.deltaTime);
 						Execute();

@@ -11,7 +11,7 @@ namespace Control {
 		ON_ENABLE = 1
 	}
 	
-	public class EnabledEventListener : BaseEventListener {
+	public class EnabledListener : BaseListener {
 		public EnabledEventType type = EnabledEventType.ON_ENABLE;
 		
 		protected override bool StateControllerEnabled => false;

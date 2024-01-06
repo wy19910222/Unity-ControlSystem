@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Control {
-	public class CustomEventListener : BaseEventListener {
+	public class CustomListener : BaseListener {
 		public string eventName;
 
 		private void Awake() {
@@ -35,7 +35,7 @@ namespace Control {
 			}
 		}
 
-		private static readonly Dictionary<string, List<CustomEventListener>> s_EventListenersDict = new Dictionary<string, List<CustomEventListener>>();
+		private static readonly Dictionary<string, List<CustomListener>> s_EventListenersDict = new Dictionary<string, List<CustomListener>>();
 
 		public static void Emit(string eventName) {
 			if (string.IsNullOrEmpty(eventName)) {
@@ -43,8 +43,8 @@ namespace Control {
 				return;
 			}
 
-			if (s_EventListenersDict.TryGetValue(eventName, out List<CustomEventListener> list)) {
-				List<CustomEventListener> listWillExecute = new List<CustomEventListener>(list);
+			if (s_EventListenersDict.TryGetValue(eventName, out List<CustomListener> list)) {
+				List<CustomListener> listWillExecute = new List<CustomListener>(list);
 				foreach (var listener in listWillExecute) {
 					try {
 						listener.Execute();
@@ -55,23 +55,23 @@ namespace Control {
 			}
 		}
 
-		private static void On(string eventName, CustomEventListener listener) {
+		private static void On(string eventName, CustomListener listener) {
 			if (Contains(eventName, listener)) {
 				Debug.LogError("Listener is already exist!\t" + eventName);
 				return;
 			}
 			
-			if (!s_EventListenersDict.TryGetValue(eventName, out List<CustomEventListener> list)) {
-				list = new List<CustomEventListener>();
+			if (!s_EventListenersDict.TryGetValue(eventName, out List<CustomListener> list)) {
+				list = new List<CustomListener>();
 				s_EventListenersDict.Add(eventName, list);
 			}
 			list.Add(listener);
 		}
 
-		private static void OffAll(CustomEventListener listener) {
+		private static void OffAll(CustomListener listener) {
 			List<string> listWillRemove = new List<string>();
 			foreach (var pair in s_EventListenersDict) {
-				List<CustomEventListener> list = pair.Value;
+				List<CustomListener> list = pair.Value;
 				for (int i = list.Count - 1; i >= 0; --i) {
 					if (list[i] == listener) {
 						list.RemoveAt(i);
@@ -86,13 +86,13 @@ namespace Control {
 			}
 		}
 
-		private static bool Contains(string eventName, CustomEventListener listener) {
+		private static bool Contains(string eventName, CustomListener listener) {
 			if (string.IsNullOrEmpty(eventName)) {
 				Debug.LogError("Event name is null!");
 				return false;
 			}
 			
-			if (s_EventListenersDict.TryGetValue(eventName, out List<CustomEventListener> list)) {
+			if (s_EventListenersDict.TryGetValue(eventName, out List<CustomListener> list)) {
 				foreach (var _listener in list) {
 					if (_listener == listener) {
 						return true;

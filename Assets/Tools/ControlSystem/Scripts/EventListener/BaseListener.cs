@@ -11,7 +11,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Control {
-	public class BaseEventListener : MonoBehaviour {
+	public class BaseListener : MonoBehaviour {
 		public string title;
 		[ComponentSelect, ShowIf("@StateControllerEnabled")]
 		public List<StateController> stateControllers = new List<StateController>();
