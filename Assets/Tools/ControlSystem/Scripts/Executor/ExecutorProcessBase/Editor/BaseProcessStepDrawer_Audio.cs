@@ -11,7 +11,7 @@ using UnityEditor;
 using UnityEditorInternal;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private void DrawAudioOneShot() {
 			AudioClip newObj = DrawObjectField<AudioClip>("音频", Target.obj);
 			if (newObj != Target.obj) {

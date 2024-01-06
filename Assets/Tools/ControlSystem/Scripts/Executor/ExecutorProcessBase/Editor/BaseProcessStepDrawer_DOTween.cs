@@ -11,7 +11,7 @@ using DG.Tweening;
 using DG.Tweening.Core;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private void DrawDOTweenRestart() {
 			ABSAnimationComponent newObj = DrawCompFieldWithThisBtn<ABSAnimationComponent>("缓动器", Target.obj);
 			if (newObj != Target.obj) {

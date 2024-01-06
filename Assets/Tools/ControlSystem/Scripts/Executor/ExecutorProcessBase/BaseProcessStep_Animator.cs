@@ -9,7 +9,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private Tweener m_AnimatorTweener;
 		private void DoStepAnimatorParameters() {
 			if (obj is Animator animator) {

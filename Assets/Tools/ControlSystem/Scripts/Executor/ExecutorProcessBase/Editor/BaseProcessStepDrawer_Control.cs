@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEditorInternal;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private ReorderableList m_ExecutorList;
 		private void DrawExecutor() {
 			if (m_ExecutorList == null) {

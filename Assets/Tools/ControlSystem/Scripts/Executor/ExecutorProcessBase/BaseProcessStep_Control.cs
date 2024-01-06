@@ -10,7 +10,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private List<int> m_PrevExecutorsIndexList;
 		private bool m_ExecutorsShuffled;
 		private void DoStepExecutor() {

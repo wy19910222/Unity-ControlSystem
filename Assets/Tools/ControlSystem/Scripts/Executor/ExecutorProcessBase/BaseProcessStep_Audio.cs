@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private void DoStepAudioOneShot() {
 			if (obj is AudioClip clip) {
 				float volumeScale = GetFArgument(0);

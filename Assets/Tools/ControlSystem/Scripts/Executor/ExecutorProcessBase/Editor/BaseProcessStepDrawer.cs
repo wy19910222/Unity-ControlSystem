@@ -18,7 +18,7 @@ using Sirenix.OdinInspector.Editor;
 using UObject = UnityEngine.Object;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> : OdinValueDrawer<TStep> where TStep : ProcessStepBase {
+	public partial class BaseProcessStepDrawer<TStep> : OdinValueDrawer<TStep> where TStep : BaseProcessStep {
 		// ReSharper disable once StaticMemberInGenericType
 		protected static float s_ContextWidth;
 
@@ -109,7 +109,7 @@ namespace Control {
 				}
 				Target.DoStep(GetTargetExecutor());
 			}
-			PropertyInfo isExecutedPI = typeof(ProcessStepBase).GetProperty("IsExecuted", BindingFlags.Instance | BindingFlags.NonPublic);
+			PropertyInfo isExecutedPI = typeof(BaseProcessStep).GetProperty("IsExecuted", BindingFlags.Instance | BindingFlags.NonPublic);
 			bool isExecuted = isExecutedPI?.GetValue(Target) is true;
 			GUILayoutOption widthToggle = GUILayout.Width(s_ContextWidth * 0.12F - 3F);
 			if (DrawToggle(isExecuted, isExecuted ? "●" : "○", widthToggle) != isExecuted) {
@@ -249,20 +249,20 @@ namespace Control {
 
 		protected void DrawUnityEvent() {
 			int valueCount = Property.SerializationRoot.ValueEntry.ValueCount;
-			ExecutorProcessBase<ProcessStepBase> executor = null;
+			BaseProcessExecutor<BaseProcessStep> baseProcessExecutor = null;
 			for (int i = 0; i < valueCount; i++) {
-				executor = Property.SerializationRoot.ValueEntry.WeakValues[i] as ExecutorProcessBase<ProcessStepBase>;
-				if (executor != null) {
+				baseProcessExecutor = Property.SerializationRoot.ValueEntry.WeakValues[i] as BaseProcessExecutor<BaseProcessStep>;
+				if (baseProcessExecutor != null) {
 					break;
 				}
 			}
-			if (executor != null) {
+			if (baseProcessExecutor != null) {
 				EditorGUILayout.BeginHorizontal();
 				EditorGUILayout.LabelField("事件", CustomEditorGUI.LabelWidthOption);
 				
-				int index = executor.steps.IndexOf(Target);
+				int index = baseProcessExecutor.steps.IndexOf(Target);
 				if (index != -1) {
-					SerializedObject serializedObject = new SerializedObject(executor);
+					SerializedObject serializedObject = new SerializedObject(baseProcessExecutor);
 					SerializedProperty serializedProperty = serializedObject.FindProperty("steps")
 							.GetArrayElementAtIndex(index)
 							.FindPropertyRelative("unityEvent");

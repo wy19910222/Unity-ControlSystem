@@ -133,7 +133,7 @@ namespace Control {
 	}
 	
 	[Serializable]
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		public string title;
 		public float time;
 		public float delayFrames;
@@ -167,7 +167,7 @@ namespace Control {
 			}
 		}
 
-		public ProcessStepBase() {
+		public BaseProcessStep() {
 			// Reset by ProcessStepTypeBase.EXECUTOR
 			objArguments.Add(null);	// executors[0]
 			iArguments.Add(1);	// executorCount

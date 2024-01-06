@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	public partial class ExecutorProcessBase<T> : BaseExecutor where T : ProcessStepBase, new() {
+	public partial class BaseProcessExecutor<T> : BaseExecutor where T : BaseProcessStep, new() {
 		public bool singleProcess;
 		// [SerializeReference]
 		public List<T> steps = new List<T>();

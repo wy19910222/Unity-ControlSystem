@@ -12,7 +12,7 @@ using DG.Tweening;
 using DG.Tweening.Core;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private void DoStepDOTweenRestart() {
 			if (obj is ABSAnimationComponent doTween) {
 				Tween tweener = doTween.tween;

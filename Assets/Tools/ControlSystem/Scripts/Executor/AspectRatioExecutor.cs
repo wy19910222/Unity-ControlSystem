@@ -11,7 +11,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class ExecutorAspectRatio : BaseExecutor {
+	public class AspectRatioExecutor : BaseExecutor {
 		public AspectRatioFitter fitter;
 		public bool targetAsValue;
 		[HideIf("@this.targetAsValue")]

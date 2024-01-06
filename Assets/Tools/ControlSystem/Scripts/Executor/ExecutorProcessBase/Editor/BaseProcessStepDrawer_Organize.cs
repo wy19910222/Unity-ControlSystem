@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEditor;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private void DrawInstantiate() {
 			Transform newObj = DrawObjectFieldWithThisBtn<Transform>("预制体", Target.obj);
 			if (newObj != Target.obj) {

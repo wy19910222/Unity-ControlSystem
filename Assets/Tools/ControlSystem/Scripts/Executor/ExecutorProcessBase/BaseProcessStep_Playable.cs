@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private void DoStepPlayableCtrl() {
 			if (obj is PlayableDirector director) {
 				int ctrlType = GetIArgument(0);

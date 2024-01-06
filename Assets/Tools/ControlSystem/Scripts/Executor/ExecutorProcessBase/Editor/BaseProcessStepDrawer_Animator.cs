@@ -14,7 +14,7 @@ using AnimatorControllerParameter = UnityEngine.AnimatorControllerParameter;
 using AnimatorControllerParameterType = UnityEngine.AnimatorControllerParameterType;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private void DrawAnimatorParameters() {
 			Animator newObj = DrawCompFieldWithThisBtn<Animator>("动画器", Target.obj);
 			if (newObj != Target.obj) {

@@ -10,7 +10,7 @@ using UnityEngine.Playables;
 using UnityEditor;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private void DrawPlayableCtrl() {
 			PlayableDirector newObj = DrawCompFieldWithThisBtn<PlayableDirector>("导演", Target.obj);
 			if (newObj != Target.obj) {

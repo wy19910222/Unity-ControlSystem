@@ -17,7 +17,7 @@ namespace Control {
 		LOG,
 	}
 	
-	public class ExecutorLog : BaseExecutor {
+	public class LogExecutor : BaseExecutor {
 		public ExecutorLogLevel level = ExecutorLogLevel.LOG;
 		public string message;
 		public Object context;

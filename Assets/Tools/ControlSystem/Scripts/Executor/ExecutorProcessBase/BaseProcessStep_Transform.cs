@@ -9,7 +9,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		[Sirenix.OdinInspector.InfoBox("每帧会调用反射，少用")]
 		public bool tweenUseRotationOrder;
 		

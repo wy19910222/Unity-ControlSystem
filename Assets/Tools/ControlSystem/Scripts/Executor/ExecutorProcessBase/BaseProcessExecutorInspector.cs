@@ -14,13 +14,13 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 
 namespace Control {
-	public partial class ExecutorProcessBase<T> {
+	public partial class BaseProcessExecutor<T> {
 		protected override bool IsExecuted {
 			get => base.IsExecuted;
 			set {
 				base.IsExecuted = value;
 				if (!value) {
-					PropertyInfo pi = typeof(ProcessStepBase).GetProperty("IsExecuted", BindingFlags.Instance | BindingFlags.NonPublic);
+					PropertyInfo pi = typeof(BaseProcessStep).GetProperty("IsExecuted", BindingFlags.Instance | BindingFlags.NonPublic);
 					if (pi != null) {
 						foreach (var step in steps) {
 							pi.SetValue(step, false);
@@ -53,7 +53,7 @@ namespace Control {
 				steps.Add(stepCount > 0 ? SerializeClone(steps[stepCount - 1]) : CreateStep());
 			}
 
-			CustomEditorGUI.BeginDisabled(!Clipboard.CanPaste<ProcessStepBase>());
+			CustomEditorGUI.BeginDisabled(!Clipboard.CanPaste<BaseProcessStep>());
 			if (GUILayout.Button("粘贴到最后")) {
 				property.RecordForUndo("Add");
 				steps.Add(Clipboard.Paste<T>());

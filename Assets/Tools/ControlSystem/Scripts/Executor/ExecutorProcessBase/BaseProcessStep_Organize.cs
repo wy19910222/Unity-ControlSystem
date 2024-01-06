@@ -8,7 +8,7 @@
 using UnityEngine;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private void DoStepInstantiate(Component executor) {
 			if (obj is Transform prefab) {
 				bool specifyParent = GetBArgument(0);
