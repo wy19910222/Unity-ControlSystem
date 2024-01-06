@@ -47,9 +47,9 @@ namespace Control {
 		[OnInspectorGUI]
 		protected void OnInspectorGUI(InspectorProperty property) {
 			EditorGUILayout.BeginHorizontal();
-			if (GUILayout.Button("克隆最后一步")) {
+			int stepCount = steps.Count;
+			if (GUILayout.Button(stepCount > 0 ? "克隆最后一步" : "新增第一步")) {
 				property.RecordForUndo("Add");
-				int stepCount = steps.Count;
 				steps.Add(stepCount > 0 ? SerializeClone(steps[stepCount - 1]) : CreateStep());
 			}
 
