@@ -10,13 +10,13 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public enum UpdateEventType {
+	public enum UpdateType {
 		FRAMES_INTERVAL = 0,
 		SECONDS_INTERVAL = 1
 	}
 	
 	public class UpdateListener : BaseListener {
-		public UpdateEventType type = UpdateEventType.FRAMES_INTERVAL;
+		public UpdateType type = UpdateType.FRAMES_INTERVAL;
 		public bool executeOnce;
 		[ShowIf("@type == UpdateEventType.FRAMES_INTERVAL")]
 		[LabelText("Delay")]
@@ -52,7 +52,7 @@ namespace Control {
 
 		private void DoUpdate() {
 			switch (type) {
-				case UpdateEventType.FRAMES_INTERVAL: {
+				case UpdateType.FRAMES_INTERVAL: {
 					if (!m_IsExecuted && m_Frames >= framesDelay) {
 						m_Frames -= Mathf.Max(framesDelay, 1);
 						Execute();
@@ -73,7 +73,7 @@ namespace Control {
 					}
 					break;
 				}
-				case UpdateEventType.SECONDS_INTERVAL: {
+				case UpdateType.SECONDS_INTERVAL: {
 					if (!m_IsExecuted && m_Seconds >= secondsDelay) {
 						m_Seconds -= Mathf.Max(secondsDelay, Time.deltaTime);
 						Execute();

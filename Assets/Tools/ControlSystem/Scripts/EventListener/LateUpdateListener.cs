@@ -10,13 +10,13 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public enum LateUpdateEventType {
+	public enum LateUpdateType {
 		FRAMES_INTERVAL = 0,
 		SECONDS_INTERVAL = 1
 	}
 	
 	public class LateUpdateListener : BaseListener {
-		public LateUpdateEventType type = LateUpdateEventType.FRAMES_INTERVAL;
+		public LateUpdateType type = LateUpdateType.FRAMES_INTERVAL;
 		public bool executeOnce;
 		[ShowIf("@type == LateUpdateEventType.FRAMES_INTERVAL")]
 		[LabelText("Delay")]
@@ -53,7 +53,7 @@ namespace Control {
 
 		private void DoUpdate() {
 			switch (type) {
-				case LateUpdateEventType.FRAMES_INTERVAL: {
+				case LateUpdateType.FRAMES_INTERVAL: {
 					if (!m_IsExecuted && m_Frames >= framesDelay) {
 						m_Frames -= Mathf.Max(framesDelay, 1);
 						Execute();
@@ -74,7 +74,7 @@ namespace Control {
 					}
 					break;
 				}
-				case LateUpdateEventType.SECONDS_INTERVAL: {
+				case LateUpdateType.SECONDS_INTERVAL: {
 					if (!m_IsExecuted && m_Seconds >= secondsDelay) {
 						m_Seconds -= Mathf.Max(secondsDelay, Time.deltaTime);
 						Execute();
