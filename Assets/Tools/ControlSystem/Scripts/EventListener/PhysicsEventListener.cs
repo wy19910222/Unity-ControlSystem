@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	public enum PhysicsType {
+	public enum PhysicsEventType {
 		ON_TRIGGER_ENTER = 0,
 		ON_TRIGGER_STAY = 1,
 		ON_TRIGGER_EXIT = 2,
@@ -19,17 +19,15 @@ namespace Control {
 		ON_COLLISION_EXIT = 5
 	}
 	
-	public class PhysicsListener : BaseListener {
-		public PhysicsType type = PhysicsType.ON_TRIGGER_ENTER;
+	public class PhysicsEventListener : BaseEventListener {
+		public PhysicsEventType type = PhysicsEventType.ON_TRIGGER_ENTER;
 		public List<Collider> colliders = new List<Collider>();
 		[Tooltip("勾选后，双方任一勾选isTrigger都能响应Trigger相关回调")]
 		public bool triggerSelf = true;
 		public bool checkColliderEnabled;
 		
-		protected override bool ExecutorEnabled => true;
-		
 		private void OnTriggerEnter(Collider other) {
-			if (enabled && type == PhysicsType.ON_TRIGGER_ENTER && (triggerSelf || other.isTrigger)) {
+			if (enabled && type == PhysicsEventType.ON_TRIGGER_ENTER && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
@@ -39,7 +37,7 @@ namespace Control {
 		}
 
 		private void OnTriggerStay(Collider other) {
-			if (enabled && type == PhysicsType.ON_TRIGGER_STAY && (triggerSelf || other.isTrigger)) {
+			if (enabled && type == PhysicsEventType.ON_TRIGGER_STAY && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
@@ -49,7 +47,7 @@ namespace Control {
 		}
 
 		private void OnTriggerExit(Collider other) {
-			if (enabled && type == PhysicsType.ON_TRIGGER_EXIT && (triggerSelf || other.isTrigger)) {
+			if (enabled && type == PhysicsEventType.ON_TRIGGER_EXIT && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
@@ -59,7 +57,7 @@ namespace Control {
 		}
 
 		private void OnCollisionEnter(Collision collision) {
-			if (enabled && type == PhysicsType.ON_COLLISION_ENTER) {
+			if (enabled && type == PhysicsEventType.ON_COLLISION_ENTER) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
@@ -69,7 +67,7 @@ namespace Control {
 		}
 
 		private void OnCollisionStay(Collision collision) {
-			if (enabled && type == PhysicsType.ON_COLLISION_STAY) {
+			if (enabled && type == PhysicsEventType.ON_COLLISION_STAY) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
@@ -79,7 +77,7 @@ namespace Control {
 		}
 
 		private void OnCollisionExit(Collision collision) {
-			if (enabled && type == PhysicsType.ON_COLLISION_EXIT) {
+			if (enabled && type == PhysicsEventType.ON_COLLISION_EXIT) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
 					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();

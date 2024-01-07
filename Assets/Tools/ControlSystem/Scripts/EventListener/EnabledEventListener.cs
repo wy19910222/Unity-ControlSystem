@@ -6,24 +6,22 @@
  */
 
 namespace Control {
-	public enum EnabledType {
+	public enum EnabledEventType {
 		ON_DISABLE = 0,
 		ON_ENABLE = 1
 	}
 	
-	public class EnabledListener : BaseListener {
-		public EnabledType type = EnabledType.ON_ENABLE;
+	public class EnabledEventListener : BaseEventListener {
+		public EnabledEventType type = EnabledEventType.ON_ENABLE;
 		
-		protected override bool ExecutorEnabled => true;
-
 		private void OnEnable() {
-			if (type == EnabledType.ON_ENABLE) {
+			if (type == EnabledEventType.ON_ENABLE) {
 				Execute();
 			}
 		}
 
 		private void OnDisable() {
-			if (type == EnabledType.ON_DISABLE) {
+			if (type == EnabledEventType.ON_DISABLE) {
 				Execute();
 			}
 		}

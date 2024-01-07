@@ -11,11 +11,9 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Control {
-	public class CustomEventListener : BaseListener {
+	public class CustomEventListener : BaseEventListener {
 		public string eventName;
 		
-		protected override bool ExecutorEnabled => true;
-
 		private void Awake() {
 			On(eventName, this);
 		}
@@ -56,8 +54,8 @@ namespace Control {
 			}
 		}
 
-		private static void On(string eventName, CustomEventListener listener) {
-			if (Contains(eventName, listener)) {
+		private static void On(string eventName, CustomEventListener eventListener) {
+			if (Contains(eventName, eventListener)) {
 				Debug.LogError("Listener is already exist!\t" + eventName);
 				return;
 			}
@@ -65,15 +63,15 @@ namespace Control {
 				list = new List<CustomEventListener>();
 				s_EventListenersDict.Add(eventName, list);
 			}
-			list.Add(listener);
+			list.Add(eventListener);
 		}
 
-		private static void OffAll(CustomEventListener listener) {
+		private static void OffAll(CustomEventListener eventListener) {
 			List<string> listWillRemove = new List<string>();
 			foreach (var pair in s_EventListenersDict) {
 				List<CustomEventListener> list = pair.Value;
 				for (int i = list.Count - 1; i >= 0; --i) {
-					if (list[i] == listener) {
+					if (list[i] == eventListener) {
 						list.RemoveAt(i);
 					}
 				}
@@ -86,14 +84,14 @@ namespace Control {
 			}
 		}
 
-		private static bool Contains(string eventName, CustomEventListener listener) {
+		private static bool Contains(string eventName, CustomEventListener eventListener) {
 			if (string.IsNullOrEmpty(eventName)) {
 				Debug.LogError("Event name is null!");
 				return false;
 			}
 			if (s_EventListenersDict.TryGetValue(eventName, out List<CustomEventListener> list)) {
 				foreach (var _listener in list) {
-					if (_listener == listener) {
+					if (_listener == eventListener) {
 						return true;
 					}
 				}

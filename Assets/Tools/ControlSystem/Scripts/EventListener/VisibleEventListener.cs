@@ -6,24 +6,22 @@
  */
 
 namespace Control {
-	public enum VisibleType {
+	public enum VisibleEventType {
 		ON_BECAME_INVISIBLE = 0,
 		ON_BECAME_VISIBLE = 1
 	}
 	
-	public class VisibleListener : BaseListener {
-		public VisibleType type = VisibleType.ON_BECAME_INVISIBLE;
+	public class VisibleEventListener : BaseEventListener {
+		public VisibleEventType type = VisibleEventType.ON_BECAME_INVISIBLE;
 		
-		protected override bool ExecutorEnabled => true;
-
 		private void OnBecameVisible() {
-			if (enabled && type == VisibleType.ON_BECAME_INVISIBLE) {
+			if (enabled && type == VisibleEventType.ON_BECAME_INVISIBLE) {
 				Execute();
 			}
 		}
 
 		private void OnBecameInvisible() {
-			if (enabled && type == VisibleType.ON_BECAME_VISIBLE) {
+			if (enabled && type == VisibleEventType.ON_BECAME_VISIBLE) {
 				Execute();
 			}
 		}
