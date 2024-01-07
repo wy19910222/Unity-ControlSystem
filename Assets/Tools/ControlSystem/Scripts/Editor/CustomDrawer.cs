@@ -589,4 +589,33 @@ namespace Control {
 			}
 		}
 	}
+	
+	[CustomPropertyDrawer(typeof(InputAxesSelectAttribute))]
+	public class InputAxesSelectDrawer : PropertyDrawer {
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+			string axesName = property.stringValue;
+			SerializedObject inputManagerAsset = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0]);
+			SerializedProperty axesProperty = inputManagerAsset.FindProperty("m_Axes");
+			HashSet<string> axesSet = new HashSet<string>();
+			for (int i = 0, axesCount = axesProperty.arraySize; i < axesCount; ++i) {
+				SerializedProperty axisProperty = axesProperty.FindPropertyRelative($"Array.data[{i}].m_Name");
+				axesSet.Add(axisProperty.stringValue);
+			}
+			inputManagerAsset.Dispose();
+			string[] axesArray = new string[axesSet.Count];
+			{
+				int i = 0;
+				foreach (string axes in axesSet) {
+					axesArray[i] = axes;
+					++i;
+				}
+			}
+			int index = Array.IndexOf(axesArray, axesName);
+			EditorGUI.BeginChangeCheck();
+			int newIndex = EditorGUI.Popup(position, label.text, index, axesArray);
+			if (EditorGUI.EndChangeCheck()) {
+				property.stringValue = axesArray[newIndex];
+			}
+		}
+	}
 }

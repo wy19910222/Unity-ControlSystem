@@ -108,4 +108,9 @@ namespace Control {
 			}
 		}
 	}
+	
+	[AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+	[Conditional("UNITY_EDITOR")]
+	public class InputAxesSelectAttribute : PropertyAttribute {
+	}
 }
