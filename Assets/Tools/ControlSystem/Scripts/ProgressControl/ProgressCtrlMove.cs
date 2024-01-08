@@ -9,8 +9,8 @@ using UnityEngine;
 
 namespace Control {
 	public class ProgressCtrlMove : BaseProgressCtrlFloat {
-		[ComponentSelect]
-		public Transform target;
+		[ComponentSelect(false, typeof(Transform), typeof(CharacterController))]
+		public Component target;
 		public Vector3 velocity;
 		public Space space = Space.Self;
 
@@ -20,7 +20,18 @@ namespace Control {
 		}
 
 		private void Update() {
-			target.Translate(velocity * (TargetValue * Time.deltaTime), space);
+			switch (target) {
+				case Transform trans:
+					trans.Translate(velocity * (TargetValue * Time.deltaTime), space);
+					break;
+				case CharacterController characterController:
+					Vector3 motion = velocity * (TargetValue * Time.deltaTime);
+					if (space == Space.Self) {
+						motion = characterController.transform.TransformVector(motion);
+					}
+					characterController.Move(motion);
+					break;
+			}
 		}
 	}
 }
