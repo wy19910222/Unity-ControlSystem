@@ -16,8 +16,6 @@ namespace Control {
 		public Space relativeTo = Space.Self;
 		public bool ignoreFramerate;
 
-		protected override float TargetValue { get; set; }
-
 		protected override void Reset() {
 			base.Reset();
 			target = transform;
