@@ -34,6 +34,7 @@ namespace Control {
 				}
 			}
 			if (isHolding != m_IsHolding) {
+				m_IsHolding = isHolding;
 				if (isHolding) {
 					foreach (var executor in downExecutors) {
 						if (executor) {
