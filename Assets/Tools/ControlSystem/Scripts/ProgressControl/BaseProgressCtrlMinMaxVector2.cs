@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
 
 namespace Control {
 	[RequireComponent(typeof(RectTransform))]
-	public class BaseProgressCtrlMinMaxVector2 : BaseProgressCtrl {
+	public abstract class BaseProgressCtrlMinMaxVector2 : BaseProgressCtrl {
 		[SerializeField, LimitedEditable]
 		protected MinMaxVector2 m_FromValue;
 		[SerializeField, LimitedEditable]
