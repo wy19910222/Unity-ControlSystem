@@ -8,7 +8,6 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
@@ -65,7 +64,9 @@ namespace TransformSearch {
 											} else {
 												string _filePath = filePath.Replace('\\', '/');
 												if (!_filePath.EndsWith(".meta") && !_filePath.Contains("/.") ) {
-													selections.AddRange(AssetDatabase.LoadAllAssetsAtPath(_filePath));
+													foreach (UObject asset in AssetDatabase.LoadAllAssetsAtPath(_filePath)) {
+														selections.Add(asset);
+													}
 												}
 											}
 										}
@@ -77,7 +78,9 @@ namespace TransformSearch {
 										selections.Add(obj);
 									} else {
 										if (AssetDatabase.IsMainAsset(obj)) {
-											selections.AddRange(AssetDatabase.LoadAllAssetsAtPath(assetPath));
+											foreach (UObject asset in AssetDatabase.LoadAllAssetsAtPath(assetPath)) {
+												selections.Add(asset);
+											}
 										} else {
 											selections.Add(obj);
 										}
@@ -99,7 +102,9 @@ namespace TransformSearch {
 									selections.Add(obj);
 								} else {
 									if (AssetDatabase.IsMainAsset(obj)) {
-										selections.AddRange(AssetDatabase.LoadAllAssetsAtPath(assetPath));
+										foreach (UObject asset in AssetDatabase.LoadAllAssetsAtPath(assetPath)) {
+											selections.Add(asset);
+										}
 									} else {
 										selections.Add(obj);
 									}
