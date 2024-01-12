@@ -12,13 +12,14 @@ namespace Control {
 	public class ProgressCtrlAnimatorTrigger : BaseProgressCtrlConst<bool> {
 		[SelfAnimatorParamSelect(AnimatorControllerParameterType.Trigger)]
 		public string paramName;
+		public bool paramValue;
 		public bool falseIsReset;
-		public bool trigger;
+		
 		protected override bool TargetValue {
-			get => trigger;
+			get => paramValue;
 			set {
-				if (value != trigger) {
-					trigger = value;
+				if (value != paramValue) {
+					paramValue = value;
 					if (value) {
 						GetComponent<Animator>().SetTrigger(paramName);
 					} else if (falseIsReset) {

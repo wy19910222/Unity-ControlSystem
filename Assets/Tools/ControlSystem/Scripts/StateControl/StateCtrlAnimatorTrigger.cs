@@ -12,13 +12,13 @@ namespace Control {
 	public class StateCtrlAnimatorTrigger : BaseStateCtrl<bool> {
 		[SelfAnimatorParamSelect(AnimatorControllerParameterType.Trigger)]
 		public string paramName;
+		public bool paramValue;
 		public bool falseIsReset;
-		public bool trigger;
 		
 		protected override bool TargetValue {
-			get => trigger;
+			get => paramValue;
 			set {
-				trigger = value;
+				paramValue = value;
 				if (value) {
 					GetComponent<Animator>().SetTrigger(paramName);
 				} else if (falseIsReset) {
