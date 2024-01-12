@@ -693,11 +693,13 @@ namespace Control {
 				}
 				CustomEditorGUI.EndLabelWidth();
 
-				GUIContent content = new GUIContent("允许掐掉", "选中后，如果两次执行间隔小于延迟，则上一次延迟会被掐掉");
-				bool newSingle = CustomEditorGUI.Toggle(relation.single, content, CustomEditorGUI.COLOR_TOGGLE_CHECKED, GUILayout.Width(58F));
-				if (newSingle != relation.single) {
-					Undo.RecordObject(m_Target, "Relation.Single");
-					relation.single = newSingle;
+				if (newDelay > 0) {
+					GUIContent content = new GUIContent("允许掐掉", "选中后，如果两次执行间隔小于延迟，则上一次延迟会被掐掉");
+					bool newSingle = CustomEditorGUI.Toggle(relation.single, content, CustomEditorGUI.COLOR_TOGGLE_CHECKED, GUILayout.Width(58F));
+					if (newSingle != relation.single) {
+						Undo.RecordObject(m_Target, "Relation.Single");
+						relation.single = newSingle;
+					}
 				}
 				
 				GUILayout.FlexibleSpace();
