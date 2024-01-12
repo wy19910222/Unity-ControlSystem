@@ -643,14 +643,10 @@ namespace Control {
 							List<int> targetUIDs = targetStates.ConvertAll(state => state.uid);
 							List<string> targetOptions = new List<string>(GetStatePopupOption(targetStates));
 							targetUIDs.InsertRange(0, new [] {
-								StateRelateState.TARGET_NONE,
-								StateRelateState.TARGET_SAME_INDEX,
-								StateRelateState.TARGET_SAME_NAME
+								ProgressRelateState.TARGET_NONE
 							});
 							targetOptions.InsertRange(0, new [] {
-								"无",
-								"相同序号",
-								"相同名称"
+								"无"
 							});
 							int newTargetUID = EditorGUILayout.IntPopup(stateRelation.targetUID, targetOptions.ToArray(), targetUIDs.ToArray());
 							if (newTargetUID != stateRelation.targetUID) {
