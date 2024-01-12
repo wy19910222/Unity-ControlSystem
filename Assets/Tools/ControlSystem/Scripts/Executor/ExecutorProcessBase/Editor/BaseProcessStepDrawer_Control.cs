@@ -124,9 +124,9 @@ namespace Control {
 				
 				bool recordIndex = Target.bArguments[1];
 				if (newRelative) {
-					GUILayoutUtility.GetRect(EditorGUIUtility.TrTempContent("以索引形式储存"), "Button");
+					GUILayoutUtility.GetRect(EditorGUIUtility.TrTempContent("以序号形式储存"), "Button");
 				} else {
-					bool newRecordIndex = DrawToggle(recordIndex, "以索引形式储存");
+					bool newRecordIndex = DrawToggle(recordIndex, "以序号形式储存");
 					if (newRecordIndex != recordIndex) {
 						Property.RecordForUndo("BArguments");
 						Target.bArguments[1] = newRecordIndex;

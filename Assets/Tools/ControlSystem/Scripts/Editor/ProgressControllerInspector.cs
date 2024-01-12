@@ -649,7 +649,7 @@ namespace Control {
 							});
 							targetOptions.InsertRange(0, new [] {
 								"无",
-								"相同索引",
+								"相同序号",
 								"相同名称"
 							});
 							int newTargetUID = EditorGUILayout.IntPopup(stateRelation.targetUID, targetOptions.ToArray(), targetUIDs.ToArray());
