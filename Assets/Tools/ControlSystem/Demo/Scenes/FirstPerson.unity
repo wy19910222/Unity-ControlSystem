@@ -1267,8 +1267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1283168419}
-  m_FromValue: -1
-  m_ToValue: 1
+  m_FromValue: -100
+  m_ToValue: 100
   m_Curve:
     serializedVersion: 2
     m_Curve:
@@ -1660,7 +1660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6aaabcb2fc4f7ba950447f44afbfc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angles: {x: 0, y: 200, z: 0}
+  angles: {x: 0, y: 2, z: 0}
   relativeTo: 1
   ignoreFramerate: 1
 --- !u!1 &1496608540
@@ -2411,8 +2411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2d3b571296413b9c86879dcb5818b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1580789976}
-  speed: 1
+  speed: 0.01
   ignoreFramerate: 1
 --- !u!1 &1637995794
 GameObject:
@@ -2528,8 +2527,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1637995797}
-  m_FromValue: -1
-  m_ToValue: 1
+  m_FromValue: -100
+  m_ToValue: 100
   m_Curve:
     serializedVersion: 2
     m_Curve:
