@@ -5,13 +5,10 @@
  * @EditTime: 2024-01-08 03:35:43 392
  */
 
-using System;
 using UnityEngine;
 
 namespace Control {
 	public class ContinuousProgressChange : MonoBehaviour {
-		[ComponentSelect]
-		public ProgressController target;
 		public float speed;
 		public bool ignoreFramerate;
 		
@@ -28,7 +25,7 @@ namespace Control {
 			if (!ignoreFramerate) {
 				value *= Time.deltaTime;
 			}
-			target.Progress += speed * value;
+			m_ProgressController.Progress += speed * value;
 		}
 	}
 }
