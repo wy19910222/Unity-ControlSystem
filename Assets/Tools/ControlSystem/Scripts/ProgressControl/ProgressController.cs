@@ -48,8 +48,8 @@ namespace Control {
 	public class ProgressController : MonoBehaviour {
 		public string title;
 		public float initialProgress;
-		public List<ProgressRelateProgress> relations = new List<ProgressRelateProgress>();
 		public List<ProgressRelateState> stateRelations = new List<ProgressRelateState>();
+		public List<ProgressRelateProgress> progressRelations = new List<ProgressRelateProgress>();
 		public List<ProgressRelateExecutor> executorRelations = new List<ProgressRelateExecutor>();
 
 		public bool lazyInit;
@@ -82,8 +82,8 @@ namespace Control {
 		private void Reset() {
 			title = string.Empty;
 			initialProgress = 0;
-			relations.Clear();
 			stateRelations.Clear();
+			progressRelations.Clear();
 			executorRelations.Clear();
 			m_PrevProgress = 0;
 			m_Progress = 0;
@@ -192,20 +192,20 @@ namespace Control {
 		 * 关联控制
 		 */
 		private void RelationApply() {
-			foreach (var relation in relations) {
+			foreach (var relation in stateRelations) {
+				if (relation.controller && relation.targetUID != ProgressRelateState.TARGET_NONE
+						&& relation.minProgress <= m_Progress && relation.maxProgress >= m_Progress) {
+					int index = relation.controller.states.FindIndex(state => state.uid == relation.targetUID);
+					DelayCall(relation.delay, () => relation.controller.Index = index, relation);
+				}
+			}
+			foreach (var relation in progressRelations) {
 				if (relation.controller && relation.minProgress <= m_Progress && relation.maxProgress >= m_Progress) {
 					var range = relation.maxProgress - relation.minProgress;
 					var rate = range == 0 ? 0 : (m_Progress - relation.minProgress) / range;
 					DelayCall(relation.delay, () => {
 						relation.controller.Progress = relation.targetMinProgress + rate * (relation.targetMaxProgress - relation.targetMinProgress);
 					}, relation);
-				}
-			}
-			foreach (var relation in stateRelations) {
-				if (relation.controller && relation.targetUID != ProgressRelateState.TARGET_NONE
-						&& relation.minProgress <= m_Progress && relation.maxProgress >= m_Progress) {
-					int index = relation.controller.states.FindIndex(state => state.uid == relation.targetUID);
-					DelayCall(relation.delay, () => relation.controller.Index = index, relation);
 				}
 			}
 			foreach (var relation in executorRelations) {

@@ -68,7 +68,7 @@ namespace Control {
 		public string title;
 		public int initialIndex;
 		public List<State> states = new List<State>();
-		public List<StateRelateState> relations = new List<StateRelateState>();
+		public List<StateRelateState> stateRelations = new List<StateRelateState>();
 		public List<StateRelateProgress> progressRelations = new List<StateRelateProgress>();
 		public List<StateRelateExecutor> executorRelations = new List<StateRelateExecutor>();
 
@@ -90,7 +90,7 @@ namespace Control {
 			title = string.Empty;
 			initialIndex = 0;
 			states.Clear();
-			relations.Clear();
+			stateRelations.Clear();
 			progressRelations.Clear();
 			executorRelations.Clear();
 			m_PrevIndex = 0;
@@ -205,7 +205,7 @@ namespace Control {
 		 * 关联控制
 		 */
 		protected virtual void RelationApply() {
-			foreach (var relation in relations) {
+			foreach (var relation in stateRelations) {
 				if (relation.controller && relation.targetUID != StateRelateState.TARGET_NONE
 						&& IsIndexSelected(relation.toUIDs, m_Index) && IsIndexSelected(relation.fromUIDs, m_PrevIndex)) {
 					switch (relation.targetUID) {
@@ -274,7 +274,7 @@ namespace Control {
 				idMap.Add(states[i].uid, i);
 				states[i].uid = i;
 			}
-			foreach (var relation in relations) {
+			foreach (var relation in stateRelations) {
 				for (int i = 0, length = relation.fromUIDs.Count; i < length; ++i) {
 					relation.fromUIDs[i] = idMap[relation.fromUIDs[i]];
 				}

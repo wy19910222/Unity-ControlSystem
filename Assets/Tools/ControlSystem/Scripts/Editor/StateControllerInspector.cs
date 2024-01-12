@@ -77,7 +77,7 @@ namespace Control {
 					EditorGUILayout.Space(5F, false);
 					DrawStates();
 					EditorGUILayout.Space(5F, false);
-					DrawStateRelations(m_Target.relations);
+					DrawStateRelations(m_Target.stateRelations);
 					EditorGUILayout.Space(2F, false);
 					DrawProgressRelations(m_Target.progressRelations);
 					EditorGUILayout.Space(2F, false);
@@ -340,7 +340,7 @@ namespace Control {
 
 		private void DrawRelationsBrief() {
 			StringBuilder sb = new StringBuilder();
-			int stateRelationCount = m_Target.relations.Count;
+			int stateRelationCount = m_Target.stateRelations.Count;
 			if (stateRelationCount > 0) {
 				sb.Append("关联状态控制:");
 				sb.Append(stateRelationCount);
