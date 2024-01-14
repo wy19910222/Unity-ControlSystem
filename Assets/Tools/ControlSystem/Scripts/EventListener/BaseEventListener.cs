@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	public class BaseEventListener : MonoBehaviour {
+	public abstract class BaseEventListener : MonoBehaviour {
 		public string title;
 		[ComponentSelect]
 		public List<BaseExecutor> executors = new List<BaseExecutor>() { null };
