@@ -29,7 +29,7 @@ namespace Control {
 		private void OnTriggerEnter(Collider other) {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_ENTER && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
-					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
+					if (!checkColliderEnabled || other.enabled && Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
 					}
 				}
@@ -39,7 +39,7 @@ namespace Control {
 		private void OnTriggerStay(Collider other) {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_STAY && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
-					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
+					if (!checkColliderEnabled || other.enabled && Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
 					}
 				}
@@ -49,7 +49,7 @@ namespace Control {
 		private void OnTriggerExit(Collider other) {
 			if (enabled && type == PhysicsEventType.ON_TRIGGER_EXIT && (triggerSelf || other.isTrigger)) {
 				if (colliders.Count == 0 || colliders.Contains(other)) {
-					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
+					if (!checkColliderEnabled || other.enabled && Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
 					}
 				}
@@ -59,7 +59,7 @@ namespace Control {
 		private void OnCollisionEnter(Collision collision) {
 			if (enabled && type == PhysicsEventType.ON_COLLISION_ENTER) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
-					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
+					if (!checkColliderEnabled || collision.collider.enabled && Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
 					}
 				}
@@ -69,7 +69,7 @@ namespace Control {
 		private void OnCollisionStay(Collision collision) {
 			if (enabled && type == PhysicsEventType.ON_COLLISION_STAY) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
-					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
+					if (!checkColliderEnabled || collision.collider.enabled && Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
 					}
 				}
@@ -79,7 +79,7 @@ namespace Control {
 		private void OnCollisionExit(Collision collision) {
 			if (enabled && type == PhysicsEventType.ON_COLLISION_EXIT) {
 				if (colliders.Count == 0 || colliders.Contains(collision.collider)) {
-					if (!checkColliderEnabled || Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
+					if (!checkColliderEnabled || collision.collider.enabled && Array.Exists(GetComponents<Collider>(), c => c.enabled)) {
 						Execute();
 					}
 				}
