@@ -29,11 +29,12 @@ namespace Control {
 					if (m_PrevExecutorsIndexList == null) {
 						m_PrevExecutorsIndexList = new List<int>();
 					}
+					int prevIndexCount = m_PrevExecutorsIndexList.Count;
 					int executorCount = GetIArgument(0);
 					int executeType = GetIArgument(1);
 					switch (executeType) {
 						case 0:
-							int nextIndex = m_PrevExecutorsIndexList.Count > 0 ? m_PrevExecutorsIndexList[m_PrevExecutorsIndexList.Count - 1] + 1 : 0;
+							int nextIndex = prevIndexCount > 0 ? m_PrevExecutorsIndexList[prevIndexCount - 1] + 1 : 0;
 							int shuffleType = GetIArgument(2);
 							if (shuffleType > 0) {
 								void Shuffle() {
@@ -52,6 +53,7 @@ namespace Control {
 										}
 										break;
 									case 2:
+										// 如果上一次正好执行完列表或已经跨过列表末尾从头执行，则这次执行前要洗牌
 										if (nextIndex >= totalCount || nextIndex < executorCount) {
 											m_ExecutorsShuffled = true;
 											Shuffle();
@@ -70,10 +72,11 @@ namespace Control {
 							}
 							break;
 						case 1:
-							int randomType = GetIArgument(2);
+							// 如果数量不够，则无法做到不重复，只能是无限制，否则，看参数
+							int randomType = prevIndexCount + executorCount > totalCount ? 0 : GetIArgument(2);
 							List<int> indexList = new List<int>();
-							for (int i = 0, prevIndexCount = m_PrevExecutorsIndexList.Count; i < totalCount; ++i) {
-								if (randomType == 0 || prevIndexCount + executorCount > totalCount || !m_PrevExecutorsIndexList.Contains(i)) {
+							for (int i = 0; i < totalCount; ++i) {
+								if (randomType == 0 || !m_PrevExecutorsIndexList.Contains(i)) {
 									indexList.Add(i);
 								}
 							}

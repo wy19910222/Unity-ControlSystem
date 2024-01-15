@@ -121,11 +121,12 @@ namespace Control {
 					if (m_PrevAudiosIndexList == null) {
 						m_PrevAudiosIndexList = new List<int>();
 					}
+					int prevIndexCount = m_PrevExecutorsIndexList.Count;
 					int audioCount = GetIArgument(0);
 					int playType = GetIArgument(1);
 					switch (playType) {
 						case 0:
-							int nextIndex = m_PrevAudiosIndexList.Count > 0 ? m_PrevAudiosIndexList[m_PrevAudiosIndexList.Count - 1] + 1 : 0;
+							int nextIndex = prevIndexCount > 0 ? m_PrevAudiosIndexList[prevIndexCount - 1] + 1 : 0;
 							int shuffleType = GetIArgument(2);
 							if (shuffleType > 0) {
 								void Shuffle() {
@@ -144,6 +145,7 @@ namespace Control {
 										}
 										break;
 									case 2:
+										// 如果上一次正好执行完列表或已经跨过列表末尾从头执行，则这次执行前要洗牌
 										if (nextIndex >= totalCount || nextIndex < audioCount) {
 											m_AudiosShuffled = true;
 											Shuffle();
@@ -162,10 +164,11 @@ namespace Control {
 							}
 							break;
 						case 1:
-							int randomType = GetIArgument(2);
+							// 如果数量不够，则无法做到不重复，只能是无限制，否则，看参数
+							int randomType = prevIndexCount + audioCount > totalCount ? 0 : GetIArgument(2);
 							List<int> indexList = new List<int>();
-							for (int i = 0, prevIndexCount = m_PrevAudiosIndexList.Count; i < totalCount; ++i) {
-								if (randomType == 0 || prevIndexCount + audioCount > totalCount || !m_PrevAudiosIndexList.Contains(i)) {
+							for (int i = 0; i < totalCount; ++i) {
+								if (randomType == 0 || !m_PrevAudiosIndexList.Contains(i)) {
 									indexList.Add(i);
 								}
 							}
