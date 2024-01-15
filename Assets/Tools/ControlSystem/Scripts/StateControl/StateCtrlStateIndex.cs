@@ -6,7 +6,7 @@
  */
 
 namespace Control {
-	public class StateCtrlState : BaseStateCtrl<int> {
+	public class StateCtrlStateIndex : BaseStateCtrl<int> {
 		[ComponentSelect]
 		public StateController target;
 
