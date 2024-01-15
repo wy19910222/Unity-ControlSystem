@@ -1,18 +1,42 @@
 /*
  * @Author: wangyun
- * @CreateTime: 2022-05-07 14:45:27 552
+ * @CreateTime: 2022-09-28 13:23:28 145
  * @LastEditor: wangyun
- * @EditTime: 2022-05-07 14:45:27 546
+ * @EditTime: 2022-09-28 13:23:28 149
  */
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Control {
-	[RequireComponent(typeof(Renderer))]
 	public class StateCtrlSortingOrder : BaseStateCtrl<int> {
+		[ComponentSelect]
+		public List<Renderer> renderers = new List<Renderer>();
+
+		protected override void Reset() {
+			base.Reset();
+			renderers.Clear();
+			renderers.AddRange(GetComponents<Renderer>());
+		}
+
+		[ContextMenu("GetRenderersInChildren")]
+		private void GetRenderersInChildren() {
+			renderers.Clear();
+			renderers.AddRange(GetComponentsInChildren<Renderer>(true));
+		}
+		
 		protected override int TargetValue {
-			get => GetComponent<Renderer>().sortingOrder;
-			set => GetComponent<Renderer>().sortingOrder = value;
+			get {
+				foreach (var rdr in renderers) {
+					return rdr.sortingOrder;
+				}
+				return 0;
+			}
+			set {
+				foreach (var rdr in renderers) {
+					rdr.sortingOrder = value;
+				}
+			}
 		}
 	}
 }
