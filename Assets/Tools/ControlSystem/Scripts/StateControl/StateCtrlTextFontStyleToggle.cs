@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using TMPro;
 
 namespace Control {
-	public class StateCtrlTextFontStyleBool : BaseStateCtrl<bool> {
+	public class StateCtrlTextFontStyleToggle : BaseStateCtrl<bool> {
 		public FontStyles type = FontStyles.Bold;
 		protected override bool TargetValue {
 			get {
