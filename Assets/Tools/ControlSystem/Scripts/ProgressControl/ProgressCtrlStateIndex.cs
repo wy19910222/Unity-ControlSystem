@@ -14,7 +14,7 @@ namespace Control {
 		Ceil = 2
 	}
 	
-	public class ProgressCtrlState : BaseProgressCtrlFloat {
+	public class ProgressCtrlStateIndex : BaseProgressCtrlFloat {
 		[ComponentSelect]
 		public StateController target;
 		public ProgressCtrlStateType type = ProgressCtrlStateType.Round;
