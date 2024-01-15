@@ -126,38 +126,23 @@ namespace Control {
 					int playType = GetIArgument(1);
 					switch (playType) {
 						case 0:
-							int nextIndex = prevIndexCount > 0 ? m_PrevAudiosIndexList[prevIndexCount - 1] + 1 : 0;
 							int shuffleType = GetIArgument(2);
-							if (shuffleType > 0) {
-								void Shuffle() {
-									for (int i = objArguments.Count - 1; i > 0; --i) {
-										int j = Random.Range(0, i + 1);
-										if (j != i) {
-											(objArguments[i], objArguments[j]) = (objArguments[j], objArguments[i]);
-										}
-									}
-								}
-								switch (shuffleType) {
-									case 1:
-										if (!m_AudiosShuffled) {
-											m_AudiosShuffled = true;
-											Shuffle();
-										}
-										break;
-									case 2:
-										// 如果上一次正好执行完列表或已经跨过列表末尾从头执行，则这次执行前要洗牌
-										if (nextIndex >= totalCount || nextIndex < audioCount) {
-											m_AudiosShuffled = true;
-											Shuffle();
-										}
-										break;
+							if (shuffleType == 1) {
+								if (!m_AudiosShuffled) {
+									m_AudiosShuffled = true;
+									Utils.Shuffle(objArguments);
 								}
 							}
+							int nextIndex = prevIndexCount > 0 ? m_PrevAudiosIndexList[prevIndexCount - 1] + 1 : 0;
 							m_PrevAudiosIndexList.Clear();
-							for (int i = 0, count = Mathf.Min(audioCount, totalCount); i < count; ++i) {
+							for (int i = 0; i < audioCount; ++i) {
 								int index = nextIndex + i;
 								if (index >= totalCount) {
-									index -= totalCount;
+									index = 0;
+								}
+								if (index == 0 && shuffleType == 2) {
+									m_AudiosShuffled = true;
+									Utils.Shuffle(objArguments);
 								}
 								m_PrevAudiosIndexList.Add(index);
 								audioList.Add(objArguments[index] as AudioClip);

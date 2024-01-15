@@ -34,38 +34,23 @@ namespace Control {
 					int executeType = GetIArgument(1);
 					switch (executeType) {
 						case 0:
-							int nextIndex = prevIndexCount > 0 ? m_PrevExecutorsIndexList[prevIndexCount - 1] + 1 : 0;
 							int shuffleType = GetIArgument(2);
-							if (shuffleType > 0) {
-								void Shuffle() {
-									for (int i = objArguments.Count - 1; i > 0; --i) {
-										int j = Random.Range(0, i + 1);
-										if (j != i) {
-											(objArguments[i], objArguments[j]) = (objArguments[j], objArguments[i]);
-										}
-									}
-								}
-								switch (shuffleType) {
-									case 1:
-										if (!m_ExecutorsShuffled) {
-											m_ExecutorsShuffled = true;
-											Shuffle();
-										}
-										break;
-									case 2:
-										// 如果上一次正好执行完列表或已经跨过列表末尾从头执行，则这次执行前要洗牌
-										if (nextIndex >= totalCount || nextIndex < executorCount) {
-											m_ExecutorsShuffled = true;
-											Shuffle();
-										}
-										break;
+							if (shuffleType == 1) {
+								if (!m_ExecutorsShuffled) {
+									m_ExecutorsShuffled = true;
+									Utils.Shuffle(objArguments);
 								}
 							}
+							int nextIndex = prevIndexCount > 0 ? m_PrevExecutorsIndexList[prevIndexCount - 1] + 1 : 0;
 							m_PrevExecutorsIndexList.Clear();
-							for (int i = 0, count = Mathf.Min(executorCount, totalCount); i < count; ++i) {
+							for (int i = 0; i < executorCount; ++i) {
 								int index = nextIndex + i;
 								if (index >= totalCount) {
-									index -= totalCount;
+									index = 0;
+								}
+								if (index == 0 && shuffleType == 2) {
+									m_ExecutorsShuffled = true;
+									Utils.Shuffle(objArguments);
 								}
 								m_PrevExecutorsIndexList.Add(index);
 								executorList.Add(objArguments[index] as BaseExecutor);
