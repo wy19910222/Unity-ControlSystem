@@ -37,8 +37,8 @@ namespace TransformSearch {
 
 		protected override List<UObject> Match(Transform trans) {
 			List<UObject> comps = new List<UObject>();
-			foreach (var luaBehaviour in trans.GetComponents<LuaBehaviour>()) {
-				if (luaBehaviour.m_LuaPath == m_LuaPath) {
+			foreach (var luaBehaviour in trans.GetComponents<LuaBehaviourWithPath>()) {
+				if (luaBehaviour.luaPath == m_LuaPath) {
 					comps.Add(luaBehaviour);
 				}
 			}
