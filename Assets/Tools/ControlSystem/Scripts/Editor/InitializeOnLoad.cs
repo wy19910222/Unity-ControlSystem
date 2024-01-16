@@ -13,7 +13,6 @@ namespace Control {
 			Dictionary<string, bool> symbolExistDict = new Dictionary<string, bool> {
 				["CINEMACHINE_EXIST"] = false,
 				["SPINE_EXIST"] = false,
-				["LUA_BEHAVIOUR_EXIST"] = false,
 			};
 			foreach (Assembly assembly in assemblies) {
 				switch (assembly.GetName().Name) {
@@ -23,15 +22,6 @@ namespace Control {
 					case "spine-unity":
 						symbolExistDict["SPINE_EXIST"] = true;
 						break;
-					case "Assembly-CSharp": {
-						foreach (var exportedType in assembly.ExportedTypes) {
-							if (exportedType.FullName == "LuaApp.LuaBehaviour") {
-								symbolExistDict["LUA_BEHAVIOUR_EXIST"] = true;
-								break;
-							}
-						}
-						break;
-					}
 				}
 			}
 			UpdateScriptingDefineSymbolsForGroup(BuildTargetGroup, symbolExistDict);
