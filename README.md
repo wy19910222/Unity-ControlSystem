@@ -143,7 +143,7 @@ stateController.State = "Chinese";  // 设置成名称为“Chinese”的状态
 BaseStateCtrl所有派生类的组件右键菜单里有个FillAllStates选项，能以当前属性值将所有状态填满。  
 ![Manual_BaseStateCtrl_Menu](Captures/Manual_BaseStateCtrl_Menu.png)  
 
-由于BaseStateCtrl只能储存单一类型的数据，也就是只能控制单一类型的属性，所以一个组件往往需要多个BaseStateCtrl的派生类才能控制所有属性，这也导致了派生类的命名不能按照受控组件命名。如果找不到用于控制目标属性的派生类，可以在代码中搜索一下目标属性名或者查阅 [BaseStateCtrl派生列表](BaseStateCtrl派生列表.md) 。
+由于BaseStateCtrl只能储存单一类型的数据，也就是只能控制单一类型的属性，所以一个组件往往需要多个BaseStateCtrl的派生类才能控制所有属性，这也导致了派生类的命名不能按照受控组件命名。如果找不到用于控制目标属性的派生类，可以在代码中搜索一下目标属性名或者查阅 [**BaseStateCtrl派生列表**](BaseStateCtrl派生列表.md) 。
 
 ### 进度控制器
 
@@ -194,7 +194,7 @@ BaseProgressCtrl是个抽象类，它具有很多不同功能的派生类，这�
 * **Curve：** 映射曲线，用于设置进度和实际属性值的映射关系，选择了几个Part就会有几个Curve。
 * **其他部分** 剩下的部分是每个派生类独有的变量，比如这里就有两个变量和缓动开关。
 
-由于BaseProgressCtrl只能储存单一类型的数据，也就是只能控制单一类型的属性，所以一个组件往往需要多个BaseProgressCtrl的派生类才能控制所有属性，这也导致了派生类的命名不能按照受控组件命名。如果找不到用于控制目标属性的派生类，可以在代码中搜索一下目标属性名或者查阅 [BaseProgressCtrl派生列表](BaseProgressCtrl派生列表.md) 。
+由于BaseProgressCtrl只能储存单一类型的数据，也就是只能控制单一类型的属性，所以一个组件往往需要多个BaseProgressCtrl的派生类才能控制所有属性，这也导致了派生类的命名不能按照受控组件命名。如果找不到用于控制目标属性的派生类，可以在代码中搜索一下目标属性名或者查阅 [**BaseProgressCtrl派生列表**](BaseProgressCtrl派生列表.md) 。
 
 ### 执行器
 
@@ -229,7 +229,7 @@ ProcessExecutor特有的属性只有2个：
     如果工程里有 [LuaBehaviour(GitHub)](https://github.com/wy19910222/Unity-LuaBehaviour) / [LuaBehaviour(Gitee)](https://gitee.com/wy19910222/Unity-LuaBehaviour) 的话，会多出3个类型。  
     如果工程里有 [spine-unity](https://github.com/EsotericSoftware/spine-runtimes/tree/4.1/spine-unity) 插件的话，也会多出3个类型。  
     ![Manual_ProcessExecutor_Type_Ext](Captures/Manual_ProcessExecutor_Type_Ext.png)  
-    不同的步骤类型会有不同的功能与界面，详细说明请查阅 [ProcessExecutor步骤类型说明](ProcessExecutor步骤类型说明.md) 。
+    不同的步骤类型会有不同的功能与界面，详细说明请查阅 [**ProcessExecutor步骤类型说明**](ProcessExecutor步骤类型说明.md) 。
 
 ### 监听器
 
