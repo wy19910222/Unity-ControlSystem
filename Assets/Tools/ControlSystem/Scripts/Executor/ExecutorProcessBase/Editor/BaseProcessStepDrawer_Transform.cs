@@ -145,7 +145,7 @@ namespace Control {
 					int newLookPart = EditorGUILayout.IntPopup(
 						"朝向轴",
 						Target.iArguments[0],
-						new [] { "N", "X", "Y", "Z", "-X", "-Y", "-Z" },
+						new [] { "None", "X", "Y", "Z", "-X", "-Y", "-Z" },
 						new [] { -1, 0, 1, 2, 3, 4, 5 }
 					);
 					if (newLookPart != Target.iArguments[0]) {
@@ -155,7 +155,7 @@ namespace Control {
 					int newUpPart = EditorGUILayout.IntPopup(
 						"向上轴",
 						Target.iArguments[1],
-						new [] { "N", "X", "Y", "Z", "-X", "-Y", "-Z" },
+						new [] { "None", "X", "Y", "Z", "-X", "-Y", "-Z" },
 						new [] { -1, 0, 1, 2, 3, 4, 5 }
 					);
 					if (newUpPart != Target.iArguments[1]) {

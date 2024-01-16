@@ -162,7 +162,7 @@ namespace Control {
 					}
 					if (!loop) {
 						EditorGUILayout.BeginHorizontal();
-						EditorGUILayout.LabelField("直接结束", CustomEditorGUI.LabelWidthOption);
+						EditorGUILayout.LabelField("跳转终态", CustomEditorGUI.LabelWidthOption);
 						bool newComplete = DrawToggle(Target.bArguments[0], Target.bArguments[0] ? "√" : "X", BTN_WIDTH_OPTION);
 						if (newComplete != Target.bArguments[0]) {
 							Property.RecordForUndo("IArguments");
