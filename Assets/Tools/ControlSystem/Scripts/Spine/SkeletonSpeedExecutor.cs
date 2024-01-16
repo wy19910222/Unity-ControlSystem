@@ -11,7 +11,7 @@ using Spine.Unity;
 using Sirenix.OdinInspector;
 
 namespace Control {
-	public class ExecutorSkeletonSpeed : BaseExecutor {
+	public class SkeletonSpeedExecutor : BaseExecutor {
 		[HideIf("@skeletonGraphic")]
 		[ComponentSelect]
 		public SkeletonAnimation skeletonAnimation;

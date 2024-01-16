@@ -13,7 +13,7 @@ using Spine;
 using Spine.Unity;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private void DrawSpineSetValue() {
 			Behaviour newObj = DrawCompFieldWithThisBtn<Behaviour>("骨骼动画", Target.obj, typeof(SkeletonAnimation), typeof(SkeletonGraphic));
 			if (newObj != Target.obj) {

@@ -14,7 +14,7 @@ using UnityEngine;
 using AnimationState = Spine.AnimationState;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		private void DoStepSpineSetValue() {
 			int fieldType = GetIArgument(0);
 			switch (fieldType) {
