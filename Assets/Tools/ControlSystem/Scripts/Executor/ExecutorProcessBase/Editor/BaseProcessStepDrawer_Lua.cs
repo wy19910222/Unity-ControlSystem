@@ -12,7 +12,7 @@ using UnityEditor;
 using LuaApp;
 
 namespace Control {
-	public partial class ProcessStepDrawerBase<TStep> {
+	public partial class BaseProcessStepDrawer<TStep> {
 		private LuaInjectionDataDrawer m_InjectionDrawer;
 		private LuaInjectionDataDrawer InjectionDrawer => m_InjectionDrawer ?? (m_InjectionDrawer = new LuaInjectionDataDrawer());
 		

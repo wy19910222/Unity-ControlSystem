@@ -13,7 +13,7 @@ using LuaApp;
 using XLua;
 
 namespace Control {
-	public partial class ProcessStepBase {
+	public partial class BaseProcessStep {
 		[HideInInspector]
 		public List<Injection7> luaInjectionList = new List<Injection7>();
 		
