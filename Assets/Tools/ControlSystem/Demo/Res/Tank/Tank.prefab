@@ -301,6 +301,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u6C34\u5E73\u56DE\u6B63"
     time: 0
@@ -352,6 +353,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u671D\u5411"
     time: 0
@@ -396,6 +398,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
 --- !u!1 &3668630833367670789
 GameObject:
@@ -530,8 +533,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "\u70AE\u7BA1\u5F62\u53D8"
   initialProgress: 0
-  relations: []
   stateRelations: []
+  progressRelations: []
   executorRelations: []
   lazyInit: 0
   invalidateTween: 0
@@ -696,7 +699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2d3b571296413b9c86879dcb5818b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 8605699431322059930}
   speed: 5
   ignoreFramerate: 0
 --- !u!1 &3668630834114630014
@@ -776,7 +778,7 @@ MonoBehaviour:
   - uid: 1
     name: 
     desc: "\u6309\u4E0B"
-  relations: []
+  stateRelations: []
   progressRelations: []
   executorRelations: []
   lazyInit: 0
@@ -920,12 +922,13 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u521B\u5EFA\u70AE\u5F39"
     time: 0
     delayFrames: 0
     type: 11
-    obj: {fileID: 5643379501061542319, guid: 8d90993a02c8f204bb3e789f9bc6daf3, type: 3}
+    obj: {fileID: 5643379501061542319, guid: 185cb67bcb7aafd4e8e7dbbd1115fcfc, type: 3}
     sArguments: []
     bArguments: 0101010001
     iArguments: 
@@ -976,6 +979,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u7981\u7528\u70AE\u7BA1\u5F62\u53D8"
     time: 0
@@ -1028,6 +1032,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u70AE\u7BA1\u6062\u590D"
     time: 0
@@ -1088,6 +1093,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u70AE\u7BA1\u6062\u590D"
     time: 0.3
@@ -1142,6 +1148,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
   - title: "\u542F\u7528\u70AE\u7BA1\u5F62\u53D8"
     time: 0.3
@@ -1194,6 +1201,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    luaInjectionList: []
     tweenUseRotationOrder: 0
 --- !u!114 &5009144387663903916
 MonoBehaviour:
