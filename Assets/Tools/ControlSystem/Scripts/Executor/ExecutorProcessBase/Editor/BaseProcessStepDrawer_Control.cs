@@ -218,6 +218,9 @@ namespace Control {
 							});
 						}
 					} else {
+						if (Target.iArguments.Count <= 0) {
+							Target.iArguments.Add(recordIndex ? 0 : states[0].uid);
+						}
 						int index = recordIndex ? Target.iArguments[0] : states.FindIndex(state => state.uid == Target.iArguments[0]);
 						int newStateIndex = EditorGUILayout.Popup("状态", index, options);
 						if (newStateIndex != index) {
