@@ -33,7 +33,8 @@
     ![Demo_UI_Tween](Captures/Demo_UI_Tween.png) ![Demo_UI_Tween_1](Captures/Demo_UI_Tween_1.png) ![Demo_UI_Tween_2](Captures/Demo_UI_Tween_2.png)  
     ![Demo_UI_Tween](Captures/Demo_UI_Tween.gif)  
 * [示例里的第一人称控制场景](Assets/LuaBehaviour/Demo/Scenes/FirstPerson.scene) 展示了监听器如何配合控制器实现期望逻辑：  
-  ![Demo_FP](Captures/Demo_FP.gif)
+  ![Demo_FP](Captures/Demo_FP.gif)  
+  <font color=orange>**本示例只是展示了一种可能性，如果只需要实现简单控制则可以这么做，如果是做比较复杂的第一人称控制，请用Unity自带的第一人称模块。**</font>  
   * **角色移动：** 示例通过监听摇杆状态实现角色移动。示例新增了一个提供角色持续移动的脚本，监听器监听横竖两个方向的摇杆状态，通过进度控制器改变移动速度，从而控制角色移动。  
     ![Demo_FP_Player](Captures/Demo_FP_Player.png) ![Demo_FP_MoveSpeed](Captures/Demo_FP_MoveSpeed.png)  
   * **视角横向控制：** 示例通过监听鼠标横向移动实现视角横向控制。示例新增了一个提供物体持续旋转的脚本，监听器监听鼠标横向移动，通过进度控制器改变旋转速度，从而控制角色横向旋转。  
