@@ -520,11 +520,12 @@ namespace Control {
 		}
 
 		private class PopupMultiSelectContent : PopupWindowContent {
+			private const float WIDTH_MIN = 100F;
 			private const float WIDTH_MAX = 200F;
 			private const float HEIGHT_MAX = 600F;
 			private const float LINE_HEIGHT = 18F;
 			
-			private static readonly GUIStyle s_Style = new GUIStyle();
+			private static readonly GUIStyle s_Style = "MenuToggleItem";
 			
 			private Action<bool[]> OnChange { get; }
 			private List<bool> IsSelects { get; }
@@ -568,7 +569,7 @@ namespace Control {
 				}
 				
 				for (int i = 0; i < optionCount; ++i) {
-					IsSelects[i] = GUILayout.Toggle(IsSelects[i], DisplayedOptions[i], "MenuToggleItem", GUILayout.Height(LINE_HEIGHT));
+					IsSelects[i] = GUILayout.Toggle(IsSelects[i], DisplayedOptions[i], s_Style, GUILayout.Height(LINE_HEIGHT));
 				}
 				
 				if (EditorGUI.EndChangeCheck()) {
@@ -597,8 +598,8 @@ namespace Control {
 					height = HEIGHT_MAX;
 					scrollBarWidth = 13F;
 				}
-				width = Mathf.Max(width, 60F) + 44F + scrollBarWidth;
-				height = Mathf.Max(height, 0F) + 2F + LINE_HEIGHT + 2F + LINE_HEIGHT + 2F + scrollBarHeight;
+				width = Mathf.Max(width, WIDTH_MIN) + scrollBarWidth;
+				height = height + 2F + LINE_HEIGHT + 2F + LINE_HEIGHT + 2F + scrollBarHeight;
 				return new Vector2(width, height);
 			}
 		}
