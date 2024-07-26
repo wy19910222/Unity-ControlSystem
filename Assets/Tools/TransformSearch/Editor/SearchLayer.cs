@@ -13,9 +13,9 @@ using UnityEditor;
 
 using UObject = UnityEngine.Object;
 
-namespace TransformSearch {
+namespace WYTools.TransformSearch {
 	public class SearchLayer : BaseSearch {
-		[MenuItem("Window/TransformSearch/SearchLayer")]
+		[MenuItem("Tools/TransformSearch/SearchLayer")]
 		private static void Init() {
 			SearchLayer window = GetWindow<SearchLayer>("LayerSearch");
 			window.minSize = new Vector2(200F, 200F);
